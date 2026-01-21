@@ -346,6 +346,125 @@ i = i++; // i останется 0
 
   </div>
 </div>
+<!-- ВОПРОС 4 -->
+<div class="item">
+  <div class="question">
+    4. Java: примитивные и ссылочные типы данных, автоупаковка и распаковка
+  </div>
+  <button class="toggle" data-id="a4">Открыть</button>
+  <div class="answer" id="a4">
+
+<p><b>1. Примитивные типы данных</b></p>
+
+<p>Это простые типы, которые хранят само значение, а не ссылку.</p>
+
+<p><b>8 примитивов Java:</b></p>
+<ul>
+  <li>byte (1 байт)</li>
+  <li>short (2 байта)</li>
+  <li>int (4 байта)</li>
+  <li>long (8 байт)</li>
+  <li>float (4 байта)</li>
+  <li>double (8 байт)</li>
+  <li>char (2 байта, символ Unicode)</li>
+  <li>boolean (логический тип)</li>
+</ul>
+
+<p><b>Свойства:</b></p>
+<ul>
+  <li>Хранятся напрямую (обычно в стеке)</li>
+  <li>Быстрые по производительности</li>
+  <li>Не имеют методов</li>
+  <li>Не могут быть null</li>
+</ul>
+
+<pre><code>int x = 10;
+boolean flag = true;
+</code></pre>
+
+<hr>
+
+<p><b>2. Ссылочные типы данных</b></p>
+
+<p>Это объекты, переменная хранит ссылку на объект в памяти.</p>
+
+<p><b>Примеры:</b></p>
+<ul>
+  <li>String</li>
+  <li>Массивы (int[])</li>
+  <li>Классы (Scanner, ArrayList)</li>
+  <li>Обёртки (Integer, Double и т.д.)</li>
+</ul>
+
+<p><b>Свойства:</b></p>
+<ul>
+  <li>Объекты хранятся в heap</li>
+  <li>Переменная может быть null</li>
+  <li>Имеют методы и поля</li>
+</ul>
+
+<pre><code>String s = "Hello";
+int[] arr = {1, 2, 3};
+</code></pre>
+
+<hr>
+
+<p><b>3. Обёрточные классы (Wrapper classes)</b></p>
+
+<p>Для каждого примитива есть класс-обёртка:</p>
+
+<ul>
+  <li>int → Integer</li>
+  <li>double → Double</li>
+  <li>boolean → Boolean</li>
+  <li>char → Character</li>
+  <li>long → Long</li>
+  <li>short → Short</li>
+  <li>byte → Byte</li>
+  <li>float → Float</li>
+</ul>
+
+<p><b>Они нужны, потому что:</b></p>
+<ul>
+  <li>Коллекции (List, Map) работают только с объектами</li>
+  <li>Объекты могут быть null</li>
+  <li>Есть полезные методы (parseInt, compareTo)</li>
+</ul>
+
+<hr>
+
+<p><b>4. Автоупаковка (Autoboxing)</b></p>
+
+<p>Автоматическое преобразование примитива в объект-обёртку.</p>
+
+<pre><code>int a = 5;
+Integer b = a;   // автоупаковка
+</code></pre>
+
+<hr>
+
+<p><b>5. Распаковка (Unboxing)</b></p>
+
+<p>Автоматическое преобразование объекта-обёртки в примитив.</p>
+
+<pre><code>Integer x = 10;
+int y = x;   // распаковка
+</code></pre>
+
+<hr>
+
+<p><b>Кратко для экзамена:</b></p>
+<ul>
+  <li>Примитивы — хранят значение, быстрые, не null</li>
+  <li>Ссылочные типы — хранят ссылку на объект</li>
+  <li>Обёртки — объекты для примитивов</li>
+  <li>Автоупаковка — примитив → объект</li>
+  <li>Распаковка — объект → примитив</li>
+  <li>Возможен NullPointerException при распаковке null</li>
+</ul>
+
+  </div>
+</div>
   
 <script>
 document.querySelectorAll(".toggle").forEach(btn=>{
