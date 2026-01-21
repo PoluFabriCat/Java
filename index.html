@@ -91,7 +91,354 @@ code{
 <body>
 
 <h1>Java — конспект</h1>
+<!-- билет 6 -->
+<div class="item">
+  <div class="question">
+    16. Java: лямбда-выражения + Predicate и Function (с нуля, простыми словами)
+  </div>
+  <button class="toggle" data-id="a16">Открыть</button>
+  <div class="answer" id="a16">
 
+<p><b>Лямбда-выражения в Java — с самого начала</b></p>
+
+<hr>
+
+<p><b>Шаг 1. Что такое метод (база)</b></p>
+<pre><code>int sum(int a, int b) {
+    return a + b;
+}
+</code></pre>
+<p>Метод принимает <code>a</code> и <code>b</code> и возвращает их сумму.</p>
+
+<hr>
+
+<p><b>Шаг 2. Когда Java хочет МЕТОД, а не класс</b></p>
+<p>Иногда Java говорит: “Мне нужен метод, который я буду вызывать”.</p>
+<p>Пример — сортировка: “Как сравнивать два числа?”</p>
+
+<hr>
+
+<p><b>Шаг 3. Старый способ (без лямбд)</b></p>
+<pre><code>List&lt;Integer&gt; list = List.of(3, 1, 2);
+
+list.sort(new Comparator&lt;Integer&gt;() {
+    @Override
+    public int compare(Integer a, Integer b) {
+        return a - b; // как сравнивать числа
+    }
+});
+</code></pre>
+<p>❌ Слишком много кода ради одного метода.</p>
+
+<hr>
+
+<p><b>Шаг 4. Что делает лямбда</b></p>
+<p>Лямбда позволяет написать <b>только сам метод</b>, без класса:</p>
+<pre><code>(a, b) -&gt; a - b
+</code></pre>
+<p>Это и есть метод <code>compare(a, b)</code>.</p>
+
+<hr>
+
+<p><b>Шаг 5. Тот же код с лямбдой</b></p>
+<pre><code>list.sort((a, b) -&gt; a - b);
+// (a, b) — параметры
+// -> — "делает"
+// a - b — результат
+</code></pre>
+
+<hr>
+
+<p><b>Шаг 6. Как читать лямбду</b></p>
+<p><code>(a, b) -&gt; a - b</code> читаем так: “Берём a и b и возвращаем a - b”.</p>
+
+<hr>
+
+<p><b>Шаг 7. Самый простой пример (1 параметр)</b></p>
+<pre><code>x -&gt; x &gt; 0
+</code></pre>
+<p>Это как метод:</p>
+<pre><code>boolean check(int x) {
+    return x &gt; 0;
+}
+</code></pre>
+
+<hr>
+
+<p><b>Шаг 8. Пример без параметров</b></p>
+<pre><code>() -&gt; System.out.println("Hello");
+</code></pre>
+<p>Это как метод:</p>
+<pre><code>void run() {
+    System.out.println("Hello");
+}
+</code></pre>
+
+<hr>
+
+<p><b>Шаг 9. Где часто встречается</b></p>
+<p><b>forEach</b> — “что делать с каждым элементом”</p>
+<pre><code>List&lt;String&gt; names = List.of("Ann", "Bob");
+
+names.forEach(name -&gt; System.out.println(name));
+</code></pre>
+
+<hr>
+
+<p><b>Шаг 10. filter — “оставить или выбросить”</b></p>
+<pre><code>List&lt;Integer&gt; nums = List.of(1, 2, 3, 4);
+
+nums.stream()
+    .filter(x -&gt; x &gt; 2)
+    .forEach(System.out::println);
+</code></pre>
+
+<hr>
+
+<p><b>Шаг 11. Очень важное ограничение</b></p>
+<p>Лямбда работает только если есть интерфейс, и в нём <b>один метод</b>:</p>
+<pre><code>interface Checker {
+    boolean check(int x);
+}
+</code></pre>
+
+<hr>
+
+<p><b>Шаг 12. Почему без интерфейса нельзя</b></p>
+<p>Java должна знать: сколько параметров и что вернуть. Это берётся из интерфейса.</p>
+
+<hr>
+
+<p><b>Шаг 13. Самое короткое объяснение</b></p>
+<p><b>Лямбда — это код метода без имени, который передают туда, где ждут метод.</b></p>
+
+<hr>
+
+<p><b>Шаг 14. Мини-шпаргалка</b></p>
+<pre><code>() -&gt; ...        // без параметров
+x -&gt; ...         // один параметр
+(a, b) -&gt; ...    // два параметра
+</code></pre>
+
+<hr>
+
+<p><b>Экзаменационная версия</b></p>
+<p>
+Лямбда-выражения — это краткая форма записи реализации метода функционального интерфейса,
+позволяющая передавать поведение как параметр.
+</p>
+
+<hr>
+
+<p><b>Predicate и Function (на экзамен)</b></p>
+
+<p><b>1) Функциональный интерфейс</b></p>
+<p>Это интерфейс, у которого ровно 1 абстрактный метод. Поэтому его удобно писать лямбдой.</p>
+
+<hr>
+
+<p><b>2) Predicate — “проверка / условие”</b></p>
+<ul>
+  <li>Вход: <code>T</code></li>
+  <li>Выход: <code>boolean</code></li>
+  <li>Метод: <code>test(T t)</code></li>
+</ul>
+
+<p><b>Пример 1: проверка числа</b></p>
+<pre><code>import java.util.function.Predicate;
+
+public class Main {
+    public static void main(String[] args) {
+        Predicate&lt;Integer&gt; isAdult = age -&gt; age &gt;= 18;
+
+        int a = 20;
+        boolean result = isAdult.test(a);
+
+        System.out.println(result);
+    }
+}
+</code></pre>
+
+<p><b>Пример 2: фильтрация списка</b></p>
+<pre><code>import java.util.List;
+import java.util.function.Predicate;
+
+public class Main {
+    public static void main(String[] args) {
+        List&lt;String&gt; names = List.of("Ann", "Bob", "Alexander");
+
+        Predicate&lt;String&gt; longName = s -&gt; s.length() &gt; 3;
+
+        for (String n : names) {
+            if (longName.test(n)) {
+                System.out.println(n);
+            }
+        }
+    }
+}
+</code></pre>
+
+<p><b>Пример 3: and / or / negate</b></p>
+<pre><code>import java.util.function.Predicate;
+
+public class Main {
+    public static void main(String[] args) {
+        Predicate&lt;Integer&gt; positive = x -&gt; x &gt; 0;
+        Predicate&lt;Integer&gt; even = x -&gt; x % 2 == 0;
+
+        System.out.println(positive.and(even).test(4));
+        System.out.println(positive.or(even).test(-2));
+        System.out.println(even.negate().test(3));
+    }
+}
+</code></pre>
+
+<hr>
+
+<p><b>3) Function&lt;T, R&gt; — “преобразование”</b></p>
+<ul>
+  <li>Вход: <code>T</code></li>
+  <li>Выход: <code>R</code></li>
+  <li>Метод: <code>apply(T t)</code></li>
+</ul>
+
+<p><b>Пример 1: строка → длина</b></p>
+<pre><code>import java.util.function.Function;
+
+public class Main {
+    public static void main(String[] args) {
+        Function&lt;String, Integer&gt; length = s -&gt; s.length();
+
+        String text = "Hello";
+        int len = length.apply(text);
+
+        System.out.println(len);
+    }
+}
+</code></pre>
+
+<p><b>Пример 2: число → строка</b></p>
+<pre><code>import java.util.function.Function;
+
+public class Main {
+    public static void main(String[] args) {
+        Function&lt;Integer, String&gt; toLabel = x -&gt; "Value=" + x;
+
+        String s = toLabel.apply(10);
+        System.out.println(s);
+    }
+}
+</code></pre>
+
+<p><b>Пример 3: andThen (цепочка)</b></p>
+<pre><code>import java.util.function.Function;
+
+public class Main {
+    public static void main(String[] args) {
+        Function&lt;String, Integer&gt; strToLen = s -&gt; s.length();
+        Function&lt;Integer, String&gt; lenToText = n -&gt; "len=" + n;
+
+        Function&lt;String, String&gt; pipeline = strToLen.andThen(lenToText);
+
+        String result = pipeline.apply("Java");
+        System.out.println(result);
+    }
+}
+</code></pre>
+
+<hr>
+
+<p><b>4) Как коротко сказать на экзамене</b></p>
+<ul>
+  <li><b>Predicate</b> — проверка: <code>T → boolean</code>, метод <code>test()</code>, часто фильтрация.</li>
+  <li><b>Function</b> — преобразование: <code>T → R</code>, метод <code>apply()</code>, часто преобразовать/достать поле.</li>
+  <li>Оба — функциональные интерфейсы, поэтому удобно писать лямбдами.</li>
+</ul>
+
+<hr>
+
+<p><b>Код из твоего проекта (GeoCoordinatesWithAltitude + Test)</b></p>
+
+<pre><code>package Zadanie;
+
+public class GeoCoordinatesWithAltitude implements Cloneable {
+
+    private double latitude;
+    private double longitude;
+    private int altitude;
+
+    public GeoCoordinatesWithAltitude(double latitude, double longitude, int altitude) {
+
+        if (latitude &lt; -90 || latitude &gt; 90) {
+            throw new IllegalArgumentException("Latitude must be between -90 and 90");
+        }
+
+        if (longitude &lt; -180 || longitude &gt; 180) {
+            throw new IllegalArgumentException("Longitude must be between -180 and 180");
+        }
+
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.altitude = altitude;
+    }
+
+    @Override
+    public GeoCoordinatesWithAltitude clone() {
+        try {
+            return (GeoCoordinatesWithAltitude) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        GeoCoordinatesWithAltitude other = (GeoCoordinatesWithAltitude) obj;
+
+        return Double.compare(other.latitude, latitude) == 0 &&
+               Double.compare(other.longitude, longitude) == 0 &&
+               altitude == other.altitude;
+    }
+
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(latitude, longitude, altitude);
+    }
+
+    @Override
+    public String toString() {
+        return "GeoCoordinatesWithAltitude{" +
+                "latitude=" + latitude +
+                ", longitude=" + longitude +
+                ", altitude=" + altitude +
+                '}';
+    }
+}
+</code></pre>
+
+<pre><code>package Zadanie;
+
+public class Test {
+    public static void main(String[] args) {
+
+        GeoCoordinatesWithAltitude p1 =
+                new GeoCoordinatesWithAltitude(55.75, 37.61, 200);
+
+        GeoCoordinatesWithAltitude p2 = p1.clone();
+
+        System.out.println(p1);
+        System.out.println(p2);
+        System.out.println(p1.equals(p2));
+    }
+}
+</code></pre>
+
+  </div>
+</div>
 <!-- ВОПРОС 1 -->
 <div class="item">
   <div class="question">
