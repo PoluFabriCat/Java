@@ -465,7 +465,115 @@ int y = x;   // распаковка
 
   </div>
 </div>
-  
+<!-- ВОПРОС 5 -->
+<div class="item">
+  <div class="question">
+    5. Java: работа с классом Scanner для ввода данных
+  </div>
+  <button class="toggle" data-id="a5">Открыть</button>
+  <div class="answer" id="a5">
+
+<p><b>Что такое Scanner?</b></p>
+<p>Это класс для ввода данных, чаще всего:</p>
+<ul>
+  <li>с клавиатуры</li>
+  <li>из файла</li>
+  <li>из строки</li>
+</ul>
+
+<p><b>Создание Scanner</b></p>
+
+<pre><code>import java.util.Scanner;
+Scanner sc = new Scanner(System.in);
+</code></pre>
+
+<p><i>System.in — клавиатура</i></p>
+
+<hr>
+
+<p><b>Ввод разных типов</b></p>
+
+<p><b>Целое число:</b></p>
+<pre><code>int x = sc.nextInt();
+</code></pre>
+
+<p><b>Вещественное число:</b></p>
+<pre><code>double x = sc.nextDouble();
+</code></pre>
+
+<p><b>Слово (до пробела):</b></p>
+<pre><code>String s = sc.next();
+</code></pre>
+
+<p><b>Строка целиком:</b></p>
+<pre><code>String line = sc.nextLine();
+</code></pre>
+
+<hr>
+
+<p><b>Как правильно читать после nextInt():</b></p>
+
+<pre><code>int x = sc.nextInt();
+sc.nextLine(); // съели перенос строки
+String s = sc.nextLine();
+</code></pre>
+
+<p><b>Проверка ввода (hasNext...)</b></p>
+
+<pre><code>if (sc.hasNextInt()) {
+    int x = sc.nextInt();
+}
+</code></pre>
+
+<p>Проверяет тип данных.</p>
+
+<hr>
+
+<p><b>Закрытие Scanner</b></p>
+
+<pre><code>sc.close();
+</code></pre>
+
+<hr>
+
+<p><b>Пример использования:</b></p>
+
+<pre><code>import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int age = sc.nextInt();
+        sc.nextLine();
+        String name = sc.nextLine();
+
+        System.out.println(name + " " + age);
+    }
+}
+</code></pre>
+
+<hr>
+
+<p><b>Ответ (кратко):</b></p>
+<p>
+Класс Scanner используется для ввода данных из различных источников, чаще всего с клавиатуры.
+Он позволяет считывать данные различных типов с помощью методов nextInt(), nextDouble(), nextLine() и других.
+Для проверки корректности ввода используются методы hasNext….
+</p>
+
+<hr>
+
+<p><b>Минимум, который надо запомнить:</b></p>
+<ul>
+  <li><code>Scanner sc = new Scanner(System.in);</code></li>
+  <li><code>nextInt()</code>, <code>nextLine()</code></li>
+  <li><code>nextInt() + nextLine()</code> = подвох</li>
+  <li><code>import java.util.Scanner;</code></li>
+</ul>
+
+  </div>
+</div>
 <script>
 document.querySelectorAll(".toggle").forEach(btn=>{
   btn.onclick = ()=>{
