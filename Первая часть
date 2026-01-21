@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Обзор языков высокого уровня и Java</title>
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#0f1a2b;
+      --text:#e8eefc;
+      --muted:#b7c3df;
+      --accent:#6aa9ff;
+      --border:rgba(255,255,255,.10);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background:radial-gradient(1200px 600px at 20% -10%, rgba(106,169,255,.25), transparent 60%),
+                 radial-gradient(900px 500px at 90% 10%, rgba(120,255,214,.12), transparent 55%),
+                 var(--bg);
+      color:var(--text);
+      line-height:1.55;
+    }
+    .wrap{
+      max-width:900px;
+      margin:0 auto;
+      padding:28px 18px 60px;
+    }
+    header{
+      margin:10px 0 18px;
+      padding:18px 18px 14px;
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      box-shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+    h1{
+      margin:0 0 6px;
+      font-size:28px;
+      letter-spacing:.2px;
+    }
+    .subtitle{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+    }
+    section{
+      margin-top:14px;
+      padding:18px;
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:rgba(255,255,255,.04);
+      box-shadow:0 8px 22px rgba(0,0,0,.25);
+    }
+    h2{
+      margin:0 0 10px;
+      font-size:18px;
+      color:var(--text);
+    }
+    p{margin:10px 0; color:var(--text)}
+    .muted{color:var(--muted)}
+    hr{
+      border:0;
+      border-top:1px dashed rgba(255,255,255,.18);
+      margin:16px 0;
+    }
+    ul{margin:8px 0 0 18px}
+    li{margin:6px 0; color:var(--text)}
+    .grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:12px;
+    }
+    @media (min-width: 760px){
+      .grid{grid-template-columns:1fr 1fr}
+    }
+    .box{
+      padding:14px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:rgba(0,0,0,.18);
+    }
+    .tag{
+      display:inline-block;
+      font-size:12px;
+      padding:4px 10px;
+      border-radius:999px;
+      border:1px solid rgba(106,169,255,.35);
+      background:rgba(106,169,255,.10);
+      color:var(--accent);
+      margin-bottom:8px;
+    }
+    .footer{
+      margin-top:16px;
+      color:var(--muted);
+      font-size:12px;
+      text-align:center;
+      opacity:.9;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Обзор языков высокого уровня и Java</h1>
+      <p class="subtitle">Короткий конспект: типизация и парадигмы, поддерживаемые Java</p>
+    </header>
+
+    <section>
+      <h2>Языки высокого уровня</h2>
+      <p>
+        <strong>Языки высокого уровня</strong> — это языки программирования, которые скрывают детали работы компьютера и
+        позволяют описывать логику задачи с помощью абстракций: <em>переменных, функций, классов, модулей</em>.
+        Они повышают <strong>читаемость</strong>, <strong>переносимость</strong> и <strong>скорость разработки</strong>.
+      </p>
+    </section>
+
+    <section>
+      <h2>Статическая и динамическая типизация</h2>
+      <p class="muted">
+        Типизация определяет, какие значения может принимать переменная и какие операции с ними допустимы.
+      </p>
+
+      <div class="grid">
+        <div class="box">
+          <div class="tag">Статическая типизация</div>
+          <p><strong>Типы проверяются на этапе компиляции.</strong> Пример: <strong>Java</strong>. Тип переменной фиксирован и не может изменяться.</p>
+          <p><strong>Плюсы:</strong></p>
+          <ul>
+            <li>ошибки типов обнаруживаются до запуска программы;</li>
+            <li>код легче сопровождать и масштабировать;</li>
+            <li>повышается надежность больших систем.</li>
+          </ul>
+          <p><strong>Минусы:</strong></p>
+          <ul>
+            <li>требуется заранее описывать типы;</li>
+            <li>ниже гибкость и скорость написания прототипов.</li>
+          </ul>
+        </div>
+
+        <div class="box">
+          <div class="tag">Динамическая типизация</div>
+          <p><strong>Типы определяются во время выполнения программы.</strong></p>
+          <p><strong>Плюсы:</strong></p>
+          <ul>
+            <li>меньше кода, высокая гибкость;</li>
+            <li>удобно для прототипирования и скриптов.</li>
+          </ul>
+          <p><strong>Минусы:</strong></p>
+          <ul>
+            <li>ошибки типов выявляются в рантайме;</li>
+            <li>сложнее поддерживать крупные проекты.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Парадигмы программирования и Java</h2>
+      <p><strong>Парадигма программирования</strong> — это подход к построению программы.</p>
+
+      <ol>
+        <li>
+          <strong>Объектно-ориентированная (основная)</strong><br />
+          Программа строится из объектов. Поддерживаются <strong>инкапсуляция</strong>, <strong>наследование</strong> и <strong>полиморфизм</strong>.
+        </li>
+        <li>
+          <strong>Императивная (процедурная)</strong><br />
+          Используются инструкции, циклы, условия, изменение состояния.
+        </li>
+        <li>
+          <strong>Функциональная (частично)</strong><br />
+          С Java 8 появились <strong>лямбда-выражения</strong>, <strong>функциональные интерфейсы</strong> и <strong>Stream API</strong>, что позволяет писать код
+          в функциональном стиле, но Java не является чисто функциональным языком.
+        </li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Итог</h2>
+      <p>
+        <strong>Java</strong> — язык высокого уровня со <strong>статической</strong> и <strong>сильной типизацией</strong>,
+        ориентированный прежде всего на <strong>объектно-ориентированное программирование</strong>, при этом поддерживающий
+        <strong>императивный</strong> стиль и отдельные элементы <strong>функционального</strong> программирования.
+      </p>
+    </section>
+
+    <div class="footer">
+      Сделано для публикации на GitHub Pages — файл <strong>index.html</strong>
+    </div>
+  </div>
+</body>
+</html>
