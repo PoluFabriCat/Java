@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Обзор языков высокого уровня и Java</title>
+  <title>Ответы к экзамену — Java</title>
   <style>
     :root{
       --bg:#0b1220;
@@ -12,6 +12,7 @@
       --muted:#b7c3df;
       --accent:#6aa9ff;
       --border:rgba(255,255,255,.10);
+      --shadow:0 10px 30px rgba(0,0,0,.35);
     }
     *{box-sizing:border-box}
     body{
@@ -23,75 +24,73 @@
       color:var(--text);
       line-height:1.55;
     }
-    .wrap{
-      max-width:900px;
-      margin:0 auto;
-      padding:28px 18px 60px;
-    }
+    .wrap{max-width:900px;margin:0 auto;padding:28px 18px 60px}
     header{
       margin:10px 0 18px;
       padding:18px 18px 14px;
       border:1px solid var(--border);
       border-radius:16px;
       background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      box-shadow:0 10px 30px rgba(0,0,0,.35);
+      box-shadow:var(--shadow);
     }
-    h1{
-      margin:0 0 6px;
-      font-size:28px;
-      letter-spacing:.2px;
-    }
-    .subtitle{
-      margin:0;
-      color:var(--muted);
-      font-size:14px;
-    }
-    section{
+    h1{margin:0 0 6px;font-size:26px;letter-spacing:.2px}
+    .subtitle{margin:0;color:var(--muted);font-size:14px}
+
+    .card{
       margin-top:14px;
-      padding:18px;
+      padding:16px;
       border:1px solid var(--border);
       border-radius:16px;
       background:rgba(255,255,255,.04);
       box-shadow:0 8px 22px rgba(0,0,0,.25);
     }
-    h2{
+    .q{
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
       margin:0 0 10px;
-      font-size:18px;
-      color:var(--text);
+      font-size:16px;
+      font-weight:700;
     }
-    p{margin:10px 0; color:var(--text)}
-    .muted{color:var(--muted)}
-    hr{
-      border:0;
-      border-top:1px dashed rgba(255,255,255,.18);
-      margin:16px 0;
-    }
-    ul{margin:8px 0 0 18px}
-    li{margin:6px 0; color:var(--text)}
-    .grid{
+    .q .num{
+      flex:0 0 auto;
+      width:28px;height:28px;
+      border-radius:8px;
       display:grid;
-      grid-template-columns:1fr;
-      gap:12px;
-    }
-    @media (min-width: 760px){
-      .grid{grid-template-columns:1fr 1fr}
-    }
-    .box{
-      padding:14px;
-      border:1px solid var(--border);
-      border-radius:14px;
-      background:rgba(0,0,0,.18);
-    }
-    .tag{
-      display:inline-block;
-      font-size:12px;
-      padding:4px 10px;
-      border-radius:999px;
+      place-items:center;
       border:1px solid rgba(106,169,255,.35);
       background:rgba(106,169,255,.10);
       color:var(--accent);
-      margin-bottom:8px;
+      font-weight:800;
     }
+
+    button.toggle{
+      appearance:none;
+      border:1px solid rgba(106,169,255,.45);
+      background:rgba(106,169,255,.12);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:12px;
+      cursor:pointer;
+      font-weight:600;
+    }
+    button.toggle:hover{background:rgba(106,169,255,.18)}
+    button.toggle:active{transform:translateY(1px)}
+    .answer{
+      margin-top:12px;
+      padding:14px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:rgba(0,0,0,.18);
+      color:var(--text);
+      display:none;
+    }
+    .answer p{margin:10px 0}
+    .answer h3{margin:10px 0 6px;font-size:15px}
+    .answer ul{margin:8px 0 0 18px}
+    .answer li{margin:6px 0}
+    .muted{color:var(--muted)}
+
     .footer{
       margin-top:16px;
       color:var(--muted);
@@ -99,98 +98,146 @@
       text-align:center;
       opacity:.9;
     }
+    code.inline{
+      padding:2px 6px;
+      border-radius:8px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);
+    }
   </style>
 </head>
 
 <body>
   <div class="wrap">
     <header>
-      <h1>Обзор языков высокого уровня и Java</h1>
-      <p class="subtitle">Короткий конспект: типизация и парадигмы, поддерживаемые Java</p>
+      <h1>Ответы к экзамену по Java</h1>
+      <p class="subtitle">Нажми “Открыть”, чтобы увидеть ответ под вопросом</p>
     </header>
 
-    <section>
-      <h2>Языки высокого уровня</h2>
-      <p>
-        <strong>Языки высокого уровня</strong> — это языки программирования, которые скрывают детали работы компьютера и
-        позволяют описывать логику задачи с помощью абстракций: <em>переменных, функций, классов, модулей</em>.
-        Они повышают <strong>читаемость</strong>, <strong>переносимость</strong> и <strong>скорость разработки</strong>.
-      </p>
-    </section>
-
-    <section>
-      <h2>Статическая и динамическая типизация</h2>
-      <p class="muted">
-        Типизация определяет, какие значения может принимать переменная и какие операции с ними допустимы.
-      </p>
-
-      <div class="grid">
-        <div class="box">
-          <div class="tag">Статическая типизация</div>
-          <p><strong>Типы проверяются на этапе компиляции.</strong> Пример: <strong>Java</strong>. Тип переменной фиксирован и не может изменяться.</p>
-          <p><strong>Плюсы:</strong></p>
-          <ul>
-            <li>ошибки типов обнаруживаются до запуска программы;</li>
-            <li>код легче сопровождать и масштабировать;</li>
-            <li>повышается надежность больших систем.</li>
-          </ul>
-          <p><strong>Минусы:</strong></p>
-          <ul>
-            <li>требуется заранее описывать типы;</li>
-            <li>ниже гибкость и скорость написания прототипов.</li>
-          </ul>
-        </div>
-
-        <div class="box">
-          <div class="tag">Динамическая типизация</div>
-          <p><strong>Типы определяются во время выполнения программы.</strong></p>
-          <p><strong>Плюсы:</strong></p>
-          <ul>
-            <li>меньше кода, высокая гибкость;</li>
-            <li>удобно для прототипирования и скриптов.</li>
-          </ul>
-          <p><strong>Минусы:</strong></p>
-          <ul>
-            <li>ошибки типов выявляются в рантайме;</li>
-            <li>сложнее поддерживать крупные проекты.</li>
-          </ul>
-        </div>
+    <!-- Вопрос 1 -->
+    <div class="card">
+      <div class="q">
+        <div class="num">1</div>
+        <div>Обзор языков высокого уровня: статическая и динамическая типизация, плюсы и минусы, парадигмы и их поддержка в Java</div>
       </div>
-    </section>
+      <button class="toggle" data-target="a1">Открыть</button>
 
-    <section>
-      <h2>Парадигмы программирования и Java</h2>
-      <p><strong>Парадигма программирования</strong> — это подход к построению программы.</p>
+      <div class="answer" id="a1">
+        <p><strong>Обзор языков высокого уровня и Java</strong></p>
+        <p>
+          Языки высокого уровня — это языки программирования, которые скрывают детали работы компьютера и позволяют
+          описывать логику задачи с помощью абстракций: переменных, функций, классов, модулей. Они повышают читаемость,
+          переносимость и скорость разработки.
+        </p>
 
-      <ol>
-        <li>
-          <strong>Объектно-ориентированная (основная)</strong><br />
-          Программа строится из объектов. Поддерживаются <strong>инкапсуляция</strong>, <strong>наследование</strong> и <strong>полиморфизм</strong>.
-        </li>
-        <li>
-          <strong>Императивная (процедурная)</strong><br />
-          Используются инструкции, циклы, условия, изменение состояния.
-        </li>
-        <li>
-          <strong>Функциональная (частично)</strong><br />
-          С Java 8 появились <strong>лямбда-выражения</strong>, <strong>функциональные интерфейсы</strong> и <strong>Stream API</strong>, что позволяет писать код
-          в функциональном стиле, но Java не является чисто функциональным языком.
-        </li>
-      </ol>
-    </section>
+        <p><strong>Статическая и динамическая типизация</strong></p>
+        <p class="muted">Типизация определяет, какие значения может принимать переменная и какие операции с ними допустимы.</p>
 
-    <section>
-      <h2>Итог</h2>
-      <p>
-        <strong>Java</strong> — язык высокого уровня со <strong>статической</strong> и <strong>сильной типизацией</strong>,
-        ориентированный прежде всего на <strong>объектно-ориентированное программирование</strong>, при этом поддерживающий
-        <strong>императивный</strong> стиль и отдельные элементы <strong>функционального</strong> программирования.
-      </p>
-    </section>
+        <p><strong>Статическая типизация</strong> — типы проверяются на этапе компиляции. Пример: Java. Тип переменной фиксирован и не может изменяться.</p>
+        <p><strong>Плюсы:</strong></p>
+        <ul>
+          <li>ошибки типов обнаруживаются до запуска программы;</li>
+          <li>код легче сопровождать и масштабировать;</li>
+          <li>повышается надежность больших систем.</li>
+        </ul>
+        <p><strong>Минусы:</strong></p>
+        <ul>
+          <li>требуется заранее описывать типы;</li>
+          <li>ниже гибкость и скорость написания прототипов.</li>
+        </ul>
 
-    <div class="footer">
-      Сделано для публикации на GitHub Pages — файл <strong>index.html</strong>
+        <p><strong>Динамическая типизация</strong> — типы определяются во время выполнения программы.</p>
+        <p><strong>Плюсы:</strong></p>
+        <ul>
+          <li>меньше кода, высокая гибкость;</li>
+          <li>удобно для прототипирования и скриптов.</li>
+        </ul>
+        <p><strong>Минусы:</strong></p>
+        <ul>
+          <li>ошибки типов выявляются в рантайме;</li>
+          <li>сложнее поддерживать крупные проекты.</li>
+        </ul>
+
+        <p><strong>Парадигмы программирования и Java</strong></p>
+        <p><strong>Парадигма программирования</strong> — это подход к построению программы.</p>
+        <ol>
+          <li><strong>Объектно-ориентированная (основная)</strong>: программа строится из объектов. Поддерживаются инкапсуляция, наследование и полиморфизм.</li>
+          <li><strong>Императивная (процедурная)</strong>: инструкции, циклы, условия, изменение состояния.</li>
+          <li><strong>Функциональная (частично)</strong>: с Java 8 — лямбда-выражения, функциональные интерфейсы и Stream API.</li>
+        </ol>
+
+        <p><strong>Итог:</strong> Java — язык высокого уровня со статической и сильной типизацией, ориентированный на ООП, при этом поддерживает императивный стиль и элементы функционального программирования.</p>
+      </div>
     </div>
+
+    <!-- Вопрос 2 -->
+    <div class="card">
+      <div class="q">
+        <div class="num">2</div>
+        <div>Java: архитектура выполнения — JVM, JDK, компиляция и интерпретация</div>
+      </div>
+      <button class="toggle" data-target="a2">Открыть</button>
+
+      <div class="answer" id="a2">
+        <p><strong>Java: архитектура выполнения — JVM, JDK, компиляция и интерпретация</strong></p>
+
+        <h3>Что такое JDK (Java Development Kit)</h3>
+        <p>Это набор инструментов для программиста:</p>
+        <ul>
+          <li>компилятор <code class="inline">javac</code></li>
+          <li>JVM</li>
+          <li>стандартные библиотеки</li>
+          <li>инструменты разработки</li>
+          <li>без JDK нельзя писать и компилировать Java</li>
+        </ul>
+
+        <h3>Что такое JVM (Java Virtual Machine)</h3>
+        <p>Это виртуальная машина, которая выполняет Java-программу. Она:</p>
+        <ul>
+          <li>запускает байт-код</li>
+          <li>управляет памятью</li>
+          <li>работает одинаково на Windows / Linux / macOS</li>
+        </ul>
+        <p class="muted"><em>Write once — run anywhere</em></p>
+
+        <h3>Компиляция в Java</h3>
+        <p>Ты пишешь код (<code class="inline">.java</code>). Компилятор <code class="inline">javac</code> компилирует его — получается байт-код (<code class="inline">.class</code>).</p>
+        <p>Это не машинный код, а код для JVM.</p>
+
+        <h3>Интерпретация в Java</h3>
+        <p>Что происходит при запуске:</p>
+        <ul>
+          <li>JVM читает байт-код</li>
+          <li>выполняет его построчно (интерпретация)</li>
+          <li>часто используемый код дополнительно компилируется JIT</li>
+        </ul>
+
+        <p>Поэтому Java одновременно:</p>
+        <ul>
+          <li>и компилируемая</li>
+          <li>и интерпретируемая</li>
+        </ul>
+
+        <p><strong>Полный путь выполнения:</strong></p>
+        <p><code class="inline">.java → javac → .class (байт-код) → JVM → выполнение</code></p>
+      </div>
+    </div>
+
+    <div class="footer">Файл: <strong>index.html</strong> • GitHub Pages</div>
   </div>
+
+  <script>
+    // Открыть/закрыть ответ под вопросом
+    document.querySelectorAll('button.toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-target');
+        const el = document.getElementById(id);
+        const isOpen = el.style.display === 'block';
+
+        el.style.display = isOpen ? 'none' : 'block';
+        btn.textContent = isOpen ? 'Открыть' : 'Закрыть';
+      });
+    });
+  </script>
 </body>
 </html>
