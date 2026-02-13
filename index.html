@@ -14,10 +14,6 @@
       --muted2: rgba(255,255,255,.42);
       --stroke: rgba(255,255,255,.10);
 
-      --glass1: rgba(255,255,255,.10);
-      --glass2: rgba(255,255,255,.06);
-      --glass3: rgba(0,0,0,.20);
-
       --shadow: 0 24px 70px rgba(0,0,0,.55);
       --shadow2: 0 10px 30px rgba(0,0,0,.35);
 
@@ -54,7 +50,7 @@
       padding-bottom: calc(var(--safe-bottom) + 10px);
     }
 
-    /* Top bar (minimal, single style) */
+    /* Topbar */
     .topbar{
       display:flex;
       align-items:center;
@@ -63,7 +59,6 @@
       gap: 12px;
       user-select:none;
     }
-
     .brand{ display:flex; align-items:center; gap:10px; min-width:0; }
     .logo{
       width: 36px; height:36px;
@@ -88,7 +83,6 @@
       28%{ transform: translateX(65%) rotate(18deg); opacity:0; }
       100%{ transform: translateX(65%) rotate(18deg); opacity:0; }
     }
-
     .brandText{ min-width:0; }
     .title{
       font-weight: 950;
@@ -106,7 +100,6 @@
       overflow:hidden;
       text-overflow: ellipsis;
     }
-
     .hintPill{
       padding: 10px 12px;
       border-radius: 999px;
@@ -132,7 +125,6 @@
       min-height: 0;
       overflow:hidden;
     }
-
     .cardWrap{
       width: min(520px, 100%);
       position:relative;
@@ -180,17 +172,15 @@
       -webkit-user-drag:none;
     }
 
-    /* Soft vignette */
     .memeMedia::after{
       content:"";
       position:absolute; inset:0;
       background:
-        radial-gradient(900px 700px at 50% 10%, rgba(0,0,0,.10), transparent 55%),
+        radial-gradient(900px 700px at 50% 10%, rgba(0,0,0,.08), transparent 55%),
         radial-gradient(900px 700px at 50% 110%, rgba(0,0,0,.35), transparent 55%);
       pointer-events:none;
     }
 
-    /* Top overlay (cleaner) */
     .memeTop{
       position:absolute;
       left: 12px; right: 12px; top: 12px;
@@ -200,6 +190,7 @@
       gap: 10px;
       pointer-events:none;
     }
+
     .glassBox{
       pointer-events:none;
       padding: 10px 12px;
@@ -209,6 +200,7 @@
       backdrop-filter: blur(12px);
       box-shadow: 0 10px 26px rgba(0,0,0,.20);
     }
+
     .author{
       font-weight: 900;
       letter-spacing: .2px;
@@ -222,6 +214,7 @@
       overflow:hidden;
       text-overflow: ellipsis;
     }
+
     .tag{
       font-size: 11px;
       color: rgba(255,255,255,.72);
@@ -231,6 +224,7 @@
       background: rgba(255,255,255,.06);
       flex:0 0 auto;
     }
+
     .meta{
       margin-top: 4px;
       font-size: 12px;
@@ -256,7 +250,6 @@
       text-align:right;
     }
 
-    /* Bottom caption */
     .caption{
       padding: 12px 14px;
       border-top: 1px solid rgba(255,255,255,.08);
@@ -313,24 +306,14 @@
       letter-spacing: .8px;
       text-transform: uppercase;
     }
-    .badgeBig.like{
-      border-color: rgba(34,229,166,.45);
-      box-shadow: 0 18px 44px rgba(34,229,166,.10);
-    }
-    .badgeBig.dislike{
-      border-color: rgba(255,77,109,.45);
-      box-shadow: 0 18px 44px rgba(255,77,109,.10);
-    }
-    .badgeBig span{
-      font-size: 14px;
-    }
-    .icon{
-      width: 22px; height:22px;
-      display:inline-block;
-    }
+    .badgeBig.like{ border-color: rgba(34,229,166,.45); box-shadow: 0 18px 44px rgba(34,229,166,.10); }
+    .badgeBig.dislike{ border-color: rgba(255,77,109,.45); box-shadow: 0 18px 44px rgba(255,77,109,.10); }
+    .badgeBig span{ font-size: 14px; }
+
+    .icon{ width: 22px; height:22px; display:inline-block; }
     .icon svg{ width:100%; height:100%; display:block; }
 
-    /* Dock (semi circle + avatar) */
+    /* Dock */
     .dock{
       position: relative;
       width: 100%;
@@ -383,7 +366,6 @@
     .avatar{
       width: 60px; height: 60px;
       border-radius: 999px;
-      overflow:hidden;
       border: 1px solid rgba(255,255,255,.18);
       box-shadow: 0 12px 24px rgba(0,0,0,.25);
       background: linear-gradient(135deg, rgba(79,119,255,.70), rgba(34,229,166,.60));
@@ -393,7 +375,7 @@
       user-select:none;
     }
 
-    /* Overlay / Sheets (swipe-to-close) */
+    /* Overlay / Sheets */
     .overlay{
       position: fixed;
       inset: 0;
@@ -404,10 +386,7 @@
       transition: opacity .18s ease;
       z-index: 50;
     }
-    .overlay.on{
-      opacity: 1;
-      pointer-events:auto;
-    }
+    .overlay.on{ opacity: 1; pointer-events:auto; }
 
     .sheet{
       position: fixed;
@@ -430,16 +409,9 @@
       overflow:hidden;
     }
 
-    .grab{
-      display:flex;
-      justify-content:center;
-      padding: 12px 0 6px;
-    }
-    .grab .bar{
-      width: 44px; height: 5px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.25);
-    }
+    .grab{ display:flex; justify-content:center; padding: 12px 0 6px; }
+    .grab .bar{ width: 44px; height: 5px; border-radius: 999px; background: rgba(255,255,255,.25); }
+
     .panelHeader{
       padding: 0 14px 10px;
       display:flex;
@@ -464,9 +436,69 @@
 
     .panelBody{ padding: 12px 14px 14px; }
 
-    .profileRow{
-      display:flex; align-items:center; gap:12px;
-      padding: 6px 0 12px;
+    /* Profile layout (new) */
+    .profilePreview{
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.14);
+      border-radius: 22px;
+      overflow:hidden;
+      position: relative;
+    }
+    .profilePreview .imgBox{
+      height: 160px;
+      background: rgba(255,255,255,.05);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+    }
+    .profilePreview img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      transform: scale(1.02);
+      filter: saturate(1.06) contrast(1.03);
+    }
+    .profilePreview .overlayText{
+      position:absolute;
+      left: 12px; right: 12px; bottom: 10px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+      pointer-events:none;
+    }
+    .previewChip{
+      pointer-events:none;
+      padding: 8px 10px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.26);
+      backdrop-filter: blur(10px);
+      font-weight: 950;
+      letter-spacing:.2px;
+      font-size: 12px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
+      max-width: 75%;
+    }
+    .previewChip2{
+      padding: 8px 10px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.26);
+      backdrop-filter: blur(10px);
+      font-weight: 950;
+      font-size: 12px;
+      white-space:nowrap;
+    }
+
+    .profileIdentity{
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      padding: 12px 2px 8px;
     }
     .pAvatar{
       width: 56px; height:56px; border-radius:999px;
@@ -475,13 +507,14 @@
       display:flex; align-items:center; justify-content:center;
       font-weight: 950;
     }
-    .name{ font-weight: 950; letter-spacing:.2px; }
-    .lvl{ margin-top:2px; font-size:12px; color: var(--muted); }
+    .name{ font-weight: 950; letter-spacing:.2px; font-size: 16px; }
+    .lvl{ margin-top:2px; font-size:12px; color: var(--muted); font-weight: 800; }
 
     .grid2{
       display:grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
+      margin-top: 10px;
     }
     .statCard{
       border: 1px solid rgba(255,255,255,.12);
@@ -492,7 +525,7 @@
     .statCard .k{ color: var(--muted); font-size:12px; font-weight:800; }
     .statCard .v{ font-weight: 950; font-size: 18px; margin-top:2px; }
 
-    .btnRow{ display:flex; gap:10px; padding-top: 10px; }
+    .btnRow{ display:flex; gap:10px; padding-top: 12px; }
     .btn{
       flex:1;
       padding: 12px 12px;
@@ -532,7 +565,7 @@
     .reason .l{ font-weight: 900; letter-spacing: .2px; }
     .reason .r{ font-size: 12px; color: var(--muted); }
 
-    /* Rating screen (full) */
+    /* Rating screen */
     .screen{
       position: fixed;
       inset: 0;
@@ -558,12 +591,14 @@
     .screenTop{
       display:flex; align-items:center; justify-content:space-between;
       padding: 8px 0 2px;
+      gap: 10px;
     }
     .screenTop .t{
       font-weight: 950;
       letter-spacing:.2px;
       font-size: 18px;
     }
+
     .tabs{
       display:flex; gap:8px;
       border:1px solid rgba(255,255,255,.12);
@@ -683,9 +718,7 @@
       80%{ transform: translate3d(1px, 0,0) rotate(.35deg); }
       100%{ transform: translate3d(0,0,0) rotate(0deg); }
     }
-    .isShaking{
-      animation: shake .18s linear infinite;
-    }
+    .isShaking{ animation: shake .18s linear infinite; }
 
     @media (prefers-reduced-motion: reduce){
       *{ animation: none !important; transition: none !important; }
@@ -722,7 +755,7 @@
 
   <div class="overlay" id="overlay"></div>
 
-  <!-- Profile sheet (no X, swipe down to close) -->
+  <!-- Profile sheet (new layout) -->
   <div class="sheet" id="profileSheet" aria-hidden="true">
     <div class="panel" data-sheet="profile">
       <div class="grab"><div class="bar"></div></div>
@@ -731,11 +764,21 @@
         <div class="swipeHint">свайп вниз — закрыть</div>
       </div>
       <div class="panelBody">
-        <div class="profileRow">
+        <div class="profilePreview">
+          <div class="imgBox" id="profilePreviewBox">
+            <!-- image injected -->
+          </div>
+          <div class="overlayText">
+            <div class="previewChip" id="profilePreviewTitle">Текущий мем</div>
+            <div class="previewChip2" id="profilePreviewScore">score 0</div>
+          </div>
+        </div>
+
+        <div class="profileIdentity">
           <div class="pAvatar" id="profileAvatar">A</div>
           <div style="min-width:0">
-            <div class="name" id="profileName">Aceton</div>
-            <div class="lvl" id="profileLvl">Уровень 1 · XP 0 · лимит: 3/день</div>
+            <div class="name" id="profileName">User</div>
+            <div class="lvl" id="profileLvl">Уровень 1 · XP 0</div>
           </div>
         </div>
 
@@ -759,14 +802,14 @@
         </div>
 
         <div class="btnRow">
-          <div class="btn primary" id="btnAddMeme">Добавить мем</div>
-          <div class="btn" id="btnRating">Рейтинг</div>
+          <div class="btn primary" id="btnRating">Общий рейтинг</div>
+          <div class="btn" id="btnAddMeme">Добавить мем</div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Report sheet (no X / no cancel; tap reason = send; swipe down to close) -->
+  <!-- Report sheet (tap reason = send; swipe down to close) -->
   <div class="sheet" id="reportSheet" aria-hidden="true">
     <div class="panel" data-sheet="report">
       <div class="grab"><div class="bar"></div></div>
@@ -781,20 +824,20 @@
     </div>
   </div>
 
-  <!-- Rating screen -->
+  <!-- Rating screen (fixed) -->
   <div class="screen" id="ratingScreen" aria-hidden="true">
     <div class="wrap">
       <div class="screenTop">
-        <div class="t">Рейтинг</div>
+        <div class="t">Общий рейтинг</div>
         <div class="hintPill" id="closeRating" style="cursor:pointer">назад</div>
       </div>
 
       <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap">
-        <div class="tabs">
-          <div class="tab on" id="tabMemes">Топ мемов</div>
-          <div class="tab" id="tabAuthors">Топ авторов</div>
+        <div class="tabs" id="modeTabs">
+          <div class="tab on" data-mode="memes">Мемы</div>
+          <div class="tab" data-mode="authors">Авторы</div>
         </div>
-        <div class="tabs" style="padding:6px" id="rangeTabs">
+        <div class="tabs" id="rangeTabs">
           <div class="tab on" data-range="day">Сегодня</div>
           <div class="tab" data-range="week">Неделя</div>
           <div class="tab" data-range="all">Всё</div>
@@ -823,14 +866,14 @@
      * Demo content *
      ****************/
     const demoMemes = [
-      { id: "m1", authorId:"u2", author:"Sasha", title:"Когда дедлайн был вчера", img:"https://picsum.photos/seed/meme201/900/1200", likes: 12, dislikes: 3, reports:0 },
-      { id: "m2", authorId:"u3", author:"Olya", title:"Сдал лабу… но не ту", img:"https://picsum.photos/seed/meme202/900/1200", likes: 4, dislikes: 6, reports:0 },
-      { id: "m3", authorId:"u4", author:"Tim", title:"Я: начну с понедельника", img:"https://picsum.photos/seed/meme203/900/1200", likes: 20, dislikes: 5, reports:0 },
-      { id: "m4", authorId:"u5", author:"Nastya", title:"Когда препод сказал 'это легко'", img:"https://picsum.photos/seed/meme204/900/1200", likes: 8, dislikes: 1, reports:0 },
-      { id: "m5", authorId:"u6", author:"Max", title:"Коммит: fix", img:"https://picsum.photos/seed/meme205/900/1200", likes: 2, dislikes: 9, reports:0 },
-      { id: "m6", authorId:"u7", author:"Ira", title:"Я после 2 часов сна", img:"https://picsum.photos/seed/meme206/900/1200", likes: 15, dislikes: 2, reports:0 },
-      { id: "m7", authorId:"u8", author:"Den", title:"Семинар — это отдых", img:"https://picsum.photos/seed/meme207/900/1200", likes: 7, dislikes: 7, reports:0 },
-      { id: "m8", authorId:"u9", author:"Vika", title:"Случайно удалил папку project", img:"https://picsum.photos/seed/meme208/900/1200", likes: 19, dislikes: 4, reports:0 },
+      { id: "m1", authorId:"u2", author:"Sasha", title:"Когда дедлайн был вчера", img:"https://picsum.photos/seed/meme401/900/1200", likes: 12, dislikes: 3, reports:0 },
+      { id: "m2", authorId:"u3", author:"Olya", title:"Сдал лабу… но не ту", img:"https://picsum.photos/seed/meme402/900/1200", likes: 4, dislikes: 6, reports:0 },
+      { id: "m3", authorId:"u4", author:"Tim", title:"Я: начну с понедельника", img:"https://picsum.photos/seed/meme403/900/1200", likes: 20, dislikes: 5, reports:0 },
+      { id: "m4", authorId:"u5", author:"Nastya", title:"Когда препод сказал 'это легко'", img:"https://picsum.photos/seed/meme404/900/1200", likes: 8, dislikes: 1, reports:0 },
+      { id: "m5", authorId:"u6", author:"Max", title:"Коммит: fix", img:"https://picsum.photos/seed/meme405/900/1200", likes: 2, dislikes: 9, reports:0 },
+      { id: "m6", authorId:"u7", author:"Ira", title:"Я после 2 часов сна", img:"https://picsum.photos/seed/meme406/900/1200", likes: 15, dislikes: 2, reports:0 },
+      { id: "m7", authorId:"u8", author:"Den", title:"Семинар — это отдых", img:"https://picsum.photos/seed/meme407/900/1200", likes: 7, dislikes: 7, reports:0 },
+      { id: "m8", authorId:"u9", author:"Vika", title:"Случайно удалил папку project", img:"https://picsum.photos/seed/meme408/900/1200", likes: 19, dislikes: 4, reports:0 },
     ];
 
     const state = {
@@ -855,10 +898,8 @@
       lastAuthorId: null,
 
       report: { openForMemeId: null },
-
       rating: { mode: "memes", range: "day" },
-
-      ui: { cardDragging: false } // for global swipe-up
+      ui: { cardDragging: false }
     };
 
     /***********************
@@ -871,7 +912,6 @@
       { level: 4, xpNeed: 260, perDay: 12, perHour: 5, title:"Топчик" },
       { level: 5, xpNeed: 520, perDay: 20, perHour: 6, title:"Король мемов" },
     ];
-
     function getLevelInfo(xp){
       let cur = LEVELS[0];
       for(const l of LEVELS) if(xp >= l.xpNeed) cur = l;
@@ -891,8 +931,18 @@
     }
 
     /*****************
-     * Feed selection *
+     * Helpers *
      *****************/
+    function initials(name){
+      const s = (name || "U").trim();
+      return (s[0] || "U").toUpperCase();
+    }
+    function escapeHtml(s){
+      return String(s ?? "").replace(/[&<>"']/g, c => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+      }[c]));
+    }
+    function scoreOf(m){ return (m.likes || 0) - (m.dislikes || 0); }
     function fisherYates(arr){
       for(let i=arr.length-1;i>0;i--){
         const j = Math.floor(Math.random()*(i+1));
@@ -900,13 +950,16 @@
       }
       return arr;
     }
+    function clamp(v, a, b){ return Math.max(a, Math.min(b, v)); }
 
+    /*****************
+     * Feed selection *
+     *****************/
     function rebuildQueue(){
       const eligible = state.memes.filter(m => !state.seen.has(m.id) && !state.hidden.has(m.id));
       const shuffled = eligible.map(m => m.id);
       fisherYates(shuffled);
 
-      // soft rule: avoid same author twice in a row at queue head
       if(state.lastAuthorId){
         for(let i=0;i<Math.min(6, shuffled.length);i++){
           const mm = state.memes.find(x => x.id === shuffled[i]);
@@ -926,7 +979,6 @@
       let id = state.queue.shift();
       let m = state.memes.find(x => x.id === id);
 
-      // avoid same author if possible
       if(state.lastAuthorId && m && m.authorId === state.lastAuthorId){
         let swapIdx = -1;
         for(let i=0;i<Math.min(8, state.queue.length);i++){
@@ -943,10 +995,11 @@
 
       state.current = m;
       renderCard(m);
+      syncProfilePreview(); // keep profile in sync even if closed
     }
 
     /****************
-     * UI Rendering *
+     * UI elements *
      ****************/
     const stage = document.getElementById("stage");
     const cardWrap = document.getElementById("cardWrap");
@@ -959,18 +1012,12 @@
     const statScore = document.getElementById("statScore");
     const statLikes = document.getElementById("statLikes");
     const statDislikes = document.getElementById("statDislikes");
-    const toast = document.getElementById("toast");
 
-    function initials(name){
-      const s = (name || "U").trim();
-      return (s[0] || "U").toUpperCase();
-    }
-    function escapeHtml(s){
-      return String(s ?? "").replace(/[&<>"']/g, c => ({
-        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
-      }[c]));
-    }
-    function scoreOf(m){ return (m.likes || 0) - (m.dislikes || 0); }
+    const profilePreviewBox = document.getElementById("profilePreviewBox");
+    const profilePreviewTitle = document.getElementById("profilePreviewTitle");
+    const profilePreviewScore = document.getElementById("profilePreviewScore");
+
+    const toast = document.getElementById("toast");
 
     function renderStats(){
       const info = getLevelInfo(state.user.xp);
@@ -985,6 +1032,19 @@
       statScore.textContent = state.user.score;
       statLikes.textContent = state.user.likesReceived;
       statDislikes.textContent = state.user.dislikesReceived;
+    }
+
+    function syncProfilePreview(){
+      const m = state.current;
+      if(!m){
+        profilePreviewBox.innerHTML = `<div style="color:var(--muted);font-weight:900;padding:24px">Нет мема</div>`;
+        profilePreviewTitle.textContent = "Текущий мем";
+        profilePreviewScore.textContent = "score 0";
+        return;
+      }
+      profilePreviewBox.innerHTML = `<img src="${escapeHtml(m.img)}" alt="">`;
+      profilePreviewTitle.textContent = m.title || "Без названия";
+      profilePreviewScore.textContent = `score ${scoreOf(m)}`;
     }
 
     function likeIcon(color){
@@ -1084,10 +1144,8 @@
     }
 
     /*****************
-     * Card gestures  *
+     * Gestures: card swipe / long press
      *****************/
-    function clamp(v, a, b){ return Math.max(a, Math.min(b, v)); }
-
     function attachCardGestures(card, indicator, badgeLike, badgeDislike){
       let startX = 0, startY = 0, dx = 0, dy = 0;
       let dragging = false;
@@ -1102,18 +1160,15 @@
         dragging = true;
         longPressed = false;
 
-        const p = point(e);
-        startX = p.x; startY = p.y;
+        startX = e.clientX; startY = e.clientY;
         dx = 0; dy = 0;
 
         card.style.transition = "none";
 
-        // long press: start shake a bit earlier, then open report
         longPressTimer = setTimeout(()=>{
           if(!dragging) return;
           longPressed = true;
           card.classList.add("isShaking");
-          // open report after a tiny shake delay
           setTimeout(()=>{
             if(!dragging) return;
             card.classList.remove("isShaking");
@@ -1126,19 +1181,15 @@
       const onMove = (e) => {
         if(!dragging) return;
 
-        const p = point(e);
-        dx = p.x - startX;
-        dy = p.y - startY;
+        dx = e.clientX - startX;
+        dy = e.clientY - startY;
 
-        // cancel long press if moved
         if(Math.abs(dx) > 10 || Math.abs(dy) > 10){
           clearTimeout(longPressTimer);
           card.classList.remove("isShaking");
         }
-
         if(longPressed) return;
 
-        // show center indicator based on dx
         const strength = clamp(Math.abs(dx) / THRESH, 0, 1);
         if(Math.abs(dx) > 8){
           indicator.classList.add("on");
@@ -1157,7 +1208,6 @@
           badgeDislike.style.display = "none";
         }
 
-        // move card
         const rot = clamp(dx / 20, -MAX_ROT, MAX_ROT);
         card.style.transform = `translate3d(${dx}px, ${dy*0.12}px, 0) rotate(${rot}deg)`;
       };
@@ -1169,7 +1219,6 @@
         clearTimeout(longPressTimer);
         card.classList.remove("isShaking");
 
-        // if long-press opened report, just reset card visual
         if(longPressed){
           indicator.classList.remove("on");
           indicator.style.opacity = "0";
@@ -1211,15 +1260,10 @@
         el.style.transform = `translate3d(${off}px, 0, 0) rotate(${rot}deg)`;
         setTimeout(done, 170);
       }
-
-      function point(e){
-        if(e.touches?.[0]) return {x:e.touches[0].clientX, y:e.touches[0].clientY};
-        return {x:e.clientX, y:e.clientY};
-      }
     }
 
     /****************
-     * Voting logic *
+     * Voting
      ****************/
     function voteCurrent(kind){
       const m = state.current;
@@ -1243,7 +1287,7 @@
     }
 
     /*****************
-     * Sheets (swipe down to close) *
+     * Sheets / overlay
      *****************/
     const overlay = document.getElementById("overlay");
     const profileSheet = document.getElementById("profileSheet");
@@ -1253,6 +1297,7 @@
       overlay.classList.add("on");
       el.classList.add("on");
       el.setAttribute("aria-hidden","false");
+      if(el === profileSheet) syncProfilePreview();
     }
     function closeSheet(el){
       el.classList.remove("on");
@@ -1268,16 +1313,14 @@
 
     document.getElementById("profileBubble").addEventListener("click", ()=> openSheet(profileSheet));
 
-    // swipe down on panel to close
+    // swipe down to close sheet
     function enableSwipeDownToClose(panelEl, sheetEl){
       let sy=0, sx=0, dragging=false;
       panelEl.addEventListener("pointerdown", (e)=>{
         dragging=true;
         sx=e.clientX; sy=e.clientY;
       }, {passive:true});
-      window.addEventListener("pointerup", ()=>{
-        dragging=false;
-      }, {passive:true});
+      window.addEventListener("pointerup", ()=>{ dragging=false; }, {passive:true});
       window.addEventListener("pointermove", (e)=>{
         if(!dragging) return;
         const dy = e.clientY - sy;
@@ -1289,17 +1332,13 @@
         }
       }, {passive:true});
     }
-
     enableSwipeDownToClose(profileSheet.querySelector(".panel"), profileSheet);
     enableSwipeDownToClose(reportSheet.querySelector(".panel"), reportSheet);
 
-    /*****************
-     * Global swipe up -> open profile
-     *****************/
+    // global swipe up -> open profile (when not dragging card)
     (function enableGlobalSwipeUp(){
       let sx=0, sy=0, tracking=false;
       window.addEventListener("pointerdown", (e)=>{
-        // do not start if any sheet open or rating open
         if(document.querySelector(".sheet.on") || document.getElementById("ratingScreen").classList.contains("on")) return;
         tracking = true;
         sx = e.clientX; sy = e.clientY;
@@ -1307,11 +1346,9 @@
 
       window.addEventListener("pointermove", (e)=>{
         if(!tracking) return;
-        // if card drag is active, ignore global swipe
         if(state.ui.cardDragging) return;
         const dy = e.clientY - sy;
         const dx = e.clientX - sx;
-        // open on clear upward swipe
         if(dy < -110 && Math.abs(dy) > Math.abs(dx)*1.2){
           tracking = false;
           openSheet(profileSheet);
@@ -1324,7 +1361,7 @@
     })();
 
     /*****************
-     * Report (tap reason = send)
+     * Report
      *****************/
     const REPORT_REASONS = [
       { id:"spam", label:"Спам / реклама", hint:"ссылки, продвижение" },
@@ -1354,9 +1391,7 @@
           </div>
           <div style="color:var(--muted2); font-weight:950">→</div>
         `;
-        el.addEventListener("click", ()=>{
-          sendReport(r.id);
-        });
+        el.addEventListener("click", ()=> sendReport(r.id));
         reasonList.appendChild(el);
       }
 
@@ -1372,7 +1407,6 @@
         m.reports = (m.reports || 0) + 1;
         state.hidden.add(m.id); // hide for this user
       }
-
       closeSheet(reportSheet);
       showToast("Жалоба отправлена");
 
@@ -1385,38 +1419,33 @@
     }
 
     /*****************
-     * Rating screen
+     * Rating (fixed)
      *****************/
     const ratingScreen = document.getElementById("ratingScreen");
     const ratingList = document.getElementById("ratingList");
-    const tabMemes = document.getElementById("tabMemes");
-    const tabAuthors = document.getElementById("tabAuthors");
-    const closeRatingBtn = document.getElementById("closeRating");
 
     document.getElementById("btnRating").addEventListener("click", ()=>{
       closeSheet(profileSheet);
       openRating();
     });
-    closeRatingBtn.addEventListener("click", closeRating);
+    document.getElementById("closeRating").addEventListener("click", closeRating);
 
-    tabMemes.addEventListener("click", ()=>{
-      state.rating.mode = "memes";
-      tabMemes.classList.add("on");
-      tabAuthors.classList.remove("on");
-      renderRating();
-    });
-    tabAuthors.addEventListener("click", ()=>{
-      state.rating.mode = "authors";
-      tabAuthors.classList.add("on");
-      tabMemes.classList.remove("on");
-      renderRating();
+    // mode tabs
+    document.querySelectorAll("#modeTabs .tab").forEach(tab=>{
+      tab.addEventListener("click", ()=>{
+        document.querySelectorAll("#modeTabs .tab").forEach(t=>t.classList.remove("on"));
+        tab.classList.add("on");
+        state.rating.mode = tab.getAttribute("data-mode");
+        renderRating();
+      });
     });
 
-    document.querySelectorAll("#rangeTabs .tab").forEach(t=>{
-      t.addEventListener("click", ()=>{
-        document.querySelectorAll("#rangeTabs .tab").forEach(x=>x.classList.remove("on"));
-        t.classList.add("on");
-        state.rating.range = t.getAttribute("data-range") || "day";
+    // range tabs
+    document.querySelectorAll("#rangeTabs .tab").forEach(tab=>{
+      tab.addEventListener("click", ()=>{
+        document.querySelectorAll("#rangeTabs .tab").forEach(t=>t.classList.remove("on"));
+        tab.classList.add("on");
+        state.rating.range = tab.getAttribute("data-range");
         renderRating();
       });
     });
@@ -1433,6 +1462,11 @@
 
     function renderRating(){
       ratingList.innerHTML = "";
+
+      // NOTE: range is a UI filter placeholder. In prod you will request from backend:
+      // GET /rating?mode=memes&range=week
+      // Here we display same data for all ranges.
+
       if(state.rating.mode === "memes"){
         const items = [...state.memes].sort((a,b)=>{
           const sa = scoreOf(a), sb = scoreOf(b);
@@ -1453,7 +1487,7 @@
           `;
           ratingList.appendChild(row);
         });
-      }else{
+      } else {
         const map = new Map();
         for(const m of state.memes){
           const a = map.get(m.authorId) || { authorId:m.authorId, author:m.author, likes:0, dislikes:0, score:0, memes:0 };
@@ -1548,7 +1582,7 @@
     });
 
     /*****************
-     * Toast helper
+     * Toast
      *****************/
     let toastTimer = null;
     function showToast(text){
@@ -1559,7 +1593,7 @@
     }
 
     /*****************
-     * Init user info *
+     * Init user from Telegram
      *****************/
     function initUserFromTelegram(){
       try{
@@ -1579,7 +1613,12 @@
     rebuildQueue();
     nextMeme();
 
-    // ESC closes (desktop)
+    // open profile via bubble click already; keep preview synced
+    document.getElementById("profileBubble").addEventListener("click", ()=>{
+      syncProfilePreview();
+    });
+
+    // ESC closes on desktop
     window.addEventListener("keydown", (e)=>{
       if(e.key === "Escape"){
         closeSheet(profileSheet);
