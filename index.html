@@ -8,20 +8,24 @@
 
   <style>
     :root{
-      --bg: #0b0f19;
-      --card: rgba(255,255,255,.06);
-      --card2: rgba(255,255,255,.10);
+      --bg: #070A12;
       --text: rgba(255,255,255,.92);
-      --muted: rgba(255,255,255,.65);
-      --muted2: rgba(255,255,255,.45);
-      --stroke: rgba(255,255,255,.12);
-      --shadow: 0 20px 60px rgba(0,0,0,.45);
-      --shadow2: 0 10px 30px rgba(0,0,0,.35);
-      --radius: 22px;
+      --muted: rgba(255,255,255,.62);
+      --muted2: rgba(255,255,255,.42);
+      --stroke: rgba(255,255,255,.10);
 
-      --like: #2ee59d;
-      --dislike: #ff4d6d;
-      --warn: #ffcc00;
+      --glass1: rgba(255,255,255,.10);
+      --glass2: rgba(255,255,255,.06);
+      --glass3: rgba(0,0,0,.20);
+
+      --shadow: 0 24px 70px rgba(0,0,0,.55);
+      --shadow2: 0 10px 30px rgba(0,0,0,.35);
+
+      --radius: 26px;
+
+      --like: #22E5A6;
+      --dislike: #FF4D6D;
+      --warn: #FFD166;
 
       --safe-bottom: env(safe-area-inset-bottom, 0px);
       --safe-top: env(safe-area-inset-top, 0px);
@@ -31,16 +35,16 @@
     html, body { height: 100%; }
     body{
       margin:0;
-      background: radial-gradient(1200px 800px at 20% -10%, rgba(73,117,255,.18), transparent 55%),
-                  radial-gradient(900px 600px at 110% 10%, rgba(46,229,157,.12), transparent 60%),
-                  radial-gradient(900px 600px at 80% 120%, rgba(255,77,109,.10), transparent 55%),
-                  var(--bg);
       color: var(--text);
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
       overflow:hidden;
+      background:
+        radial-gradient(1100px 700px at 20% -10%, rgba(79,119,255,.24), transparent 60%),
+        radial-gradient(900px 600px at 115% 10%, rgba(34,229,166,.14), transparent 62%),
+        radial-gradient(900px 600px at 80% 120%, rgba(255,77,109,.12), transparent 58%),
+        linear-gradient(180deg, #060812 0%, #070A12 30%, #070A12 100%);
     }
 
-    /* Telegram fit */
     .app{
       height: 100%;
       width: 100%;
@@ -50,24 +54,23 @@
       padding-bottom: calc(var(--safe-bottom) + 10px);
     }
 
-    /* Top bar */
+    /* Top bar (minimal, single style) */
     .topbar{
       display:flex;
       align-items:center;
       justify-content:space-between;
       padding: 10px 14px 8px;
-      gap: 10px;
-    }
-    .brand{
-      display:flex; align-items:center; gap:10px;
+      gap: 12px;
       user-select:none;
     }
+
+    .brand{ display:flex; align-items:center; gap:10px; min-width:0; }
     .logo{
-      width: 34px; height:34px;
-      border-radius: 12px;
+      width: 36px; height:36px;
+      border-radius: 14px;
       background:
-        radial-gradient(18px 18px at 30% 35%, rgba(255,255,255,.28), transparent 60%),
-        linear-gradient(135deg, rgba(73,117,255,.85), rgba(46,229,157,.85));
+        radial-gradient(18px 18px at 30% 35%, rgba(255,255,255,.30), transparent 60%),
+        linear-gradient(135deg, rgba(79,119,255,.95), rgba(34,229,166,.88));
       box-shadow: var(--shadow2);
       position:relative;
       overflow:hidden;
@@ -75,42 +78,48 @@
     .logo::after{
       content:"";
       position:absolute; inset:-40%;
-      background: linear-gradient(120deg, transparent 35%, rgba(255,255,255,.20) 45%, transparent 55%);
+      background: linear-gradient(120deg, transparent 35%, rgba(255,255,255,.22) 45%, transparent 55%);
       transform: rotate(18deg);
-      animation: shine 6s linear infinite;
+      animation: shine 6.5s linear infinite;
     }
     @keyframes shine{
-      0%{ transform: translateX(-40%) rotate(18deg); opacity:.0; }
-      12%{ opacity:.7; }
-      30%{ transform: translateX(60%) rotate(18deg); opacity:0; }
-      100%{ transform: translateX(60%) rotate(18deg); opacity:0; }
+      0%{ transform: translateX(-55%) rotate(18deg); opacity:0; }
+      10%{ opacity:.65; }
+      28%{ transform: translateX(65%) rotate(18deg); opacity:0; }
+      100%{ transform: translateX(65%) rotate(18deg); opacity:0; }
     }
-    .brand .title{
-      font-weight: 800;
+
+    .brandText{ min-width:0; }
+    .title{
+      font-weight: 950;
       letter-spacing: .2px;
-      line-height: 1.05;
+      line-height:1.1;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
     }
-    .brand .subtitle{
+    .subtitle{
       font-size: 12px;
       color: var(--muted);
       margin-top: 2px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
     }
-    .pill{
-      display:flex; align-items:center; gap:8px;
-      padding: 8px 10px;
-      border: 1px solid var(--stroke);
-      background: rgba(255,255,255,.04);
+
+    .hintPill{
+      padding: 10px 12px;
       border-radius: 999px;
-      box-shadow: 0 6px 18px rgba(0,0,0,.22);
-      user-select:none;
-      cursor: default;
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,.05);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 22px rgba(0,0,0,.22);
+      color: rgba(255,255,255,.78);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .2px;
+      white-space:nowrap;
     }
-    .dot{
-      width:10px; height:10px; border-radius:999px;
-      background: var(--like);
-      box-shadow: 0 0 0 5px rgba(46,229,157,.12);
-    }
-    .pill small{ color: var(--muted); }
 
     /* Stage */
     .stage{
@@ -121,6 +130,7 @@
       justify-content:center;
       position:relative;
       min-height: 0;
+      overflow:hidden;
     }
 
     .cardWrap{
@@ -136,8 +146,8 @@
     .memeCard{
       width: 100%;
       border-radius: var(--radius);
-      border: 1px solid rgba(255,255,255,.10);
-      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      border: 1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(255,255,255,.11), rgba(255,255,255,.05));
       box-shadow: var(--shadow);
       overflow:hidden;
       position:absolute;
@@ -146,7 +156,7 @@
       flex-direction:column;
       transform: translate3d(0,0,0);
       will-change: transform;
-      touch-action: pan-y; /* allow vertical scroll if needed, we handle horizontal */
+      touch-action: pan-y;
     }
 
     .memeMedia{
@@ -160,18 +170,27 @@
       overflow:hidden;
     }
 
-    /* image */
     .memeMedia img{
       width: 100%;
       height: 100%;
       object-fit: cover;
       transform: scale(1.02);
-      filter: saturate(1.06) contrast(1.02);
+      filter: saturate(1.06) contrast(1.03);
       user-select:none;
       -webkit-user-drag:none;
     }
 
-    /* top overlay */
+    /* Soft vignette */
+    .memeMedia::after{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(900px 700px at 50% 10%, rgba(0,0,0,.10), transparent 55%),
+        radial-gradient(900px 700px at 50% 110%, rgba(0,0,0,.35), transparent 55%);
+      pointer-events:none;
+    }
+
+    /* Top overlay (cleaner) */
     .memeTop{
       position:absolute;
       left: 12px; right: 12px; top: 12px;
@@ -181,55 +200,63 @@
       gap: 10px;
       pointer-events:none;
     }
-    .authorBox{
+    .glassBox{
       pointer-events:none;
       padding: 10px 12px;
-      border-radius: 16px;
-      background: rgba(0,0,0,.28);
+      border-radius: 18px;
+      background: rgba(0,0,0,.26);
       border: 1px solid rgba(255,255,255,.12);
-      backdrop-filter: blur(10px);
-      max-width: 70%;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 26px rgba(0,0,0,.20);
     }
     .author{
-      font-weight: 750;
+      font-weight: 900;
       letter-spacing: .2px;
       font-size: 14px;
       line-height:1.2;
-      display:flex; align-items:center; gap:8px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      max-width: 64vw;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
     }
-    .author .badge{
+    .tag{
       font-size: 11px;
-      color: rgba(255,255,255,.70);
-      padding: 2px 7px;
+      color: rgba(255,255,255,.72);
+      padding: 2px 8px;
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,.14);
       background: rgba(255,255,255,.06);
+      flex:0 0 auto;
     }
     .meta{
       margin-top: 4px;
       font-size: 12px;
-      color: rgba(255,255,255,.70);
+      color: rgba(255,255,255,.72);
       display:flex; gap:10px; flex-wrap:wrap;
     }
 
-    .scoreBox{
-      pointer-events:none;
-      padding: 10px 12px;
-      border-radius: 16px;
-      background: rgba(0,0,0,.28);
-      border: 1px solid rgba(255,255,255,.12);
-      backdrop-filter: blur(10px);
-      text-align:right;
-      min-width: 96px;
-    }
     .score{
-      font-weight: 900;
+      font-weight: 950;
       font-size: 16px;
       letter-spacing: .2px;
+      text-align:right;
     }
-    .score small{ font-weight: 650; color: rgba(255,255,255,.70); }
+    .score small{
+      font-weight: 850;
+      color: rgba(255,255,255,.70);
+      margin-left: 6px;
+    }
+    .microHint{
+      margin-top: 3px;
+      font-size: 12px;
+      color: rgba(255,255,255,.68);
+      text-align:right;
+    }
 
-    /* bottom caption */
+    /* Bottom caption */
     .caption{
       padding: 12px 14px;
       border-top: 1px solid rgba(255,255,255,.08);
@@ -239,11 +266,9 @@
       align-items:flex-start;
       gap: 12px;
     }
-    .caption .text{
-      min-width:0;
-    }
-    .caption .text .line1{
-      font-weight: 760;
+    .caption .text{ min-width:0; }
+    .line1{
+      font-weight: 920;
       font-size: 14px;
       line-height: 1.2;
       margin-bottom: 2px;
@@ -251,7 +276,7 @@
       overflow:hidden;
       text-overflow: ellipsis;
     }
-    .caption .text .line2{
+    .line2{
       font-size: 12px;
       color: var(--muted);
       white-space:nowrap;
@@ -259,132 +284,121 @@
       text-overflow: ellipsis;
     }
 
-    .hint{
+    /* Center swipe indicator */
+    .centerIndicator{
+      position:absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) scale(.92);
+      opacity: 0;
+      pointer-events:none;
+      transition: opacity .10s ease, transform .10s ease;
+      z-index: 5;
+    }
+    .centerIndicator.on{
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    .badgeBig{
       display:flex;
       align-items:center;
-      gap:8px;
-      color: rgba(255,255,255,.70);
-      font-size: 12px;
-      user-select:none;
-      white-space:nowrap;
-    }
-    .hint .chip{
-      width: 8px; height: 8px; border-radius: 999px;
-      background: rgba(255,255,255,.45);
-    }
-
-    /* Swipe feedback overlays */
-    .stamp{
-      position:absolute;
-      top: 20px;
-      padding: 10px 14px;
-      border-radius: 16px;
-      border: 2px solid;
-      font-weight: 900;
+      gap: 10px;
+      padding: 14px 16px;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.28);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 18px 44px rgba(0,0,0,.28);
+      font-weight: 950;
       letter-spacing: .8px;
-      font-size: 14px;
       text-transform: uppercase;
-      transform: rotate(-10deg) scale(.96);
-      opacity: 0;
-      transition: opacity .12s ease, transform .12s ease;
-      background: rgba(0,0,0,.18);
-      backdrop-filter: blur(10px);
-      pointer-events:none;
     }
-    .stamp.like{
-      left: 18px;
-      color: var(--like);
-      border-color: rgba(46,229,157,.85);
-      box-shadow: 0 0 0 10px rgba(46,229,157,.08);
+    .badgeBig.like{
+      border-color: rgba(34,229,166,.45);
+      box-shadow: 0 18px 44px rgba(34,229,166,.10);
     }
-    .stamp.dislike{
-      right: 18px;
-      color: var(--dislike);
-      border-color: rgba(255,77,109,.85);
-      box-shadow: 0 0 0 10px rgba(255,77,109,.08);
-      transform: rotate(10deg) scale(.96);
+    .badgeBig.dislike{
+      border-color: rgba(255,77,109,.45);
+      box-shadow: 0 18px 44px rgba(255,77,109,.10);
     }
-    .stamp.on{
-      opacity: 1;
-      transform: rotate(-10deg) scale(1.02);
+    .badgeBig span{
+      font-size: 14px;
     }
-    .stamp.dislike.on{
-      transform: rotate(10deg) scale(1.02);
+    .icon{
+      width: 22px; height:22px;
+      display:inline-block;
     }
+    .icon svg{ width:100%; height:100%; display:block; }
 
-    /* Bottom profile bubble (semi-circle dock) */
+    /* Dock (semi circle + avatar) */
     .dock{
       position: relative;
       width: 100%;
       display:flex;
       justify-content:center;
       padding: 10px 14px 0;
-      pointer-events:none; /* allow only inside */
+      pointer-events:none;
     }
-
     .dockInner{
       width: min(520px, 100%);
       position:relative;
-      height: 84px;
+      height: 86px;
       pointer-events:none;
     }
-
+    .plate{
+      pointer-events:none;
+      position:absolute;
+      left: 50%;
+      bottom: -40px;
+      transform: translateX(-50%);
+      width: 190px;
+      height: 128px;
+      border-radius: 128px 128px 30px 30px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 16px 34px rgba(0,0,0,.22);
+    }
     .bubble{
       pointer-events:auto;
       position:absolute;
       left: 50%;
       bottom: 0;
       transform: translateX(-50%);
-      width: 76px;
-      height: 76px;
+      width: 78px;
+      height: 78px;
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,.16);
       background: radial-gradient(18px 18px at 30% 30%, rgba(255,255,255,.26), transparent 60%),
                   linear-gradient(135deg, rgba(255,255,255,.12), rgba(255,255,255,.06));
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(12px);
       box-shadow: var(--shadow2);
       display:flex;
       align-items:center;
       justify-content:center;
       cursor:pointer;
-      transition: transform .18s ease, filter .18s ease;
+      transition: transform .14s ease;
     }
     .bubble:active{ transform: translateX(-50%) scale(.97); }
     .avatar{
-      width: 58px; height: 58px;
+      width: 60px; height: 60px;
       border-radius: 999px;
       overflow:hidden;
       border: 1px solid rgba(255,255,255,.18);
-      box-shadow: 0 10px 20px rgba(0,0,0,.25);
-      background: linear-gradient(135deg, rgba(73,117,255,.65), rgba(46,229,157,.55));
+      box-shadow: 0 12px 24px rgba(0,0,0,.25);
+      background: linear-gradient(135deg, rgba(79,119,255,.70), rgba(34,229,166,.60));
       display:flex; align-items:center; justify-content:center;
-      font-weight: 900;
+      font-weight: 950;
       letter-spacing:.4px;
       user-select:none;
     }
 
-    /* semi-circle plate */
-    .plate{
-      pointer-events:none;
-      position:absolute;
-      left: 50%;
-      bottom: -38px;
-      transform: translateX(-50%);
-      width: 180px;
-      height: 120px;
-      border-radius: 120px 120px 28px 28px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.05);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 12px 28px rgba(0,0,0,.25);
-    }
-
-    /* Sheets */
+    /* Overlay / Sheets (swipe-to-close) */
     .overlay{
       position: fixed;
       inset: 0;
       background: rgba(0,0,0,.45);
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(10px);
       opacity: 0;
       pointer-events:none;
       transition: opacity .18s ease;
@@ -398,17 +412,18 @@
     .sheet{
       position: fixed;
       left: 0; right: 0;
-      bottom: -100%;
+      bottom: -110%;
       z-index: 60;
       transition: bottom .26s cubic-bezier(.2,.85,.2,1);
       padding: 10px 12px calc(var(--safe-bottom) + 12px);
+      will-change: bottom;
     }
     .sheet.on{ bottom: 0; }
 
     .panel{
       width: min(560px, 100%);
       margin: 0 auto;
-      border-radius: 26px;
+      border-radius: 28px;
       border: 1px solid rgba(255,255,255,.14);
       background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.06));
       box-shadow: var(--shadow);
@@ -416,47 +431,56 @@
     }
 
     .grab{
-      display:flex; justify-content:center;
-      padding: 10px 0 0;
+      display:flex;
+      justify-content:center;
+      padding: 12px 0 6px;
     }
     .grab .bar{
       width: 44px; height: 5px;
       border-radius: 999px;
       background: rgba(255,255,255,.25);
     }
-
     .panelHeader{
+      padding: 0 14px 10px;
       display:flex;
-      align-items:center;
+      align-items:flex-end;
       justify-content:space-between;
-      padding: 12px 14px 10px;
+      gap: 12px;
       border-bottom: 1px solid rgba(255,255,255,.10);
     }
     .panelHeader .h{
-      font-weight: 900;
+      font-weight: 950;
       letter-spacing: .2px;
+      font-size: 16px;
+      padding-bottom: 10px;
     }
-    .xbtn{
-      width: 38px; height: 38px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.18);
-      backdrop-filter: blur(10px);
-      color: rgba(255,255,255,.88);
-      display:flex; align-items:center; justify-content:center;
-      cursor:pointer;
-      user-select:none;
-      transition: transform .12s ease;
+    .panelHeader .swipeHint{
+      padding-bottom: 10px;
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 800;
+      white-space:nowrap;
     }
-    .xbtn:active{ transform: scale(.96); }
 
-    .panelBody{
-      padding: 12px 14px 14px;
+    .panelBody{ padding: 12px 14px 14px; }
+
+    .profileRow{
+      display:flex; align-items:center; gap:12px;
+      padding: 6px 0 12px;
     }
+    .pAvatar{
+      width: 56px; height:56px; border-radius:999px;
+      background: linear-gradient(135deg, rgba(79,119,255,.72), rgba(34,229,166,.60));
+      border: 1px solid rgba(255,255,255,.16);
+      display:flex; align-items:center; justify-content:center;
+      font-weight: 950;
+    }
+    .name{ font-weight: 950; letter-spacing:.2px; }
+    .lvl{ margin-top:2px; font-size:12px; color: var(--muted); }
 
     .grid2{
       display:grid;
-      grid-template-columns: 1.15fr .85fr;
+      grid-template-columns: 1fr 1fr;
       gap: 10px;
     }
     .statCard{
@@ -465,27 +489,8 @@
       border-radius: 18px;
       padding: 12px 12px;
     }
-    .statCard .k{ color: var(--muted); font-size:12px; }
-    .statCard .v{ font-weight: 900; font-size: 18px; margin-top:2px; }
-
-    .profileRow{
-      display:flex; align-items:center; gap:12px;
-      padding: 8px 0 12px;
-    }
-    .profileRow .pAvatar{
-      width: 54px; height:54px; border-radius:999px;
-      background: linear-gradient(135deg, rgba(73,117,255,.65), rgba(46,229,157,.55));
-      border: 1px solid rgba(255,255,255,.16);
-      display:flex; align-items:center; justify-content:center;
-      font-weight: 900;
-    }
-    .profileRow .name{
-      font-weight: 900; letter-spacing:.2px;
-    }
-    .profileRow .lvl{
-      margin-top:2px;
-      font-size:12px; color: var(--muted);
-    }
+    .statCard .k{ color: var(--muted); font-size:12px; font-weight:800; }
+    .statCard .v{ font-weight: 950; font-size: 18px; margin-top:2px; }
 
     .btnRow{ display:flex; gap:10px; padding-top: 10px; }
     .btn{
@@ -494,31 +499,22 @@
       border-radius: 18px;
       border: 1px solid rgba(255,255,255,.14);
       background: rgba(255,255,255,.06);
-      color: rgba(255,255,255,.90);
-      font-weight: 800;
+      color: rgba(255,255,255,.92);
+      font-weight: 900;
       letter-spacing: .2px;
       cursor:pointer;
       user-select:none;
       text-align:center;
-      transition: transform .12s ease, filter .12s ease;
+      transition: transform .12s ease;
     }
     .btn:active{ transform: scale(.98); }
     .btn.primary{
-      background: linear-gradient(135deg, rgba(73,117,255,.70), rgba(46,229,157,.55));
+      background: linear-gradient(135deg, rgba(79,119,255,.72), rgba(34,229,166,.56));
       border-color: rgba(255,255,255,.18);
     }
-    .btn.danger{
-      background: rgba(255,77,109,.12);
-      border-color: rgba(255,77,109,.25);
-    }
 
-    /* Report sheet list */
-    .reasonList{
-      display:flex;
-      flex-direction:column;
-      gap: 8px;
-      padding-top: 6px;
-    }
+    /* Report reasons */
+    .reasonList{ display:flex; flex-direction:column; gap: 8px; padding-top: 6px; }
     .reason{
       display:flex;
       justify-content:space-between;
@@ -530,21 +526,11 @@
       background: rgba(0,0,0,.12);
       cursor:pointer;
       user-select:none;
-      transition: transform .12s ease, border-color .12s ease, background .12s ease;
+      transition: transform .10s ease;
     }
     .reason:active{ transform: scale(.99); }
-    .reason .l{
-      font-weight: 800;
-      letter-spacing: .2px;
-    }
-    .reason .r{
-      font-size: 12px;
-      color: var(--muted);
-    }
-    .reason.sel{
-      border-color: rgba(255,204,0,.55);
-      background: rgba(255,204,0,.10);
-    }
+    .reason .l{ font-weight: 900; letter-spacing: .2px; }
+    .reason .r{ font-size: 12px; color: var(--muted); }
 
     /* Rating screen (full) */
     .screen{
@@ -559,11 +545,7 @@
       padding-bottom: calc(var(--safe-bottom) + 12px);
       overflow:hidden;
     }
-    .screen.on{
-      opacity: 1;
-      pointer-events:auto;
-      transform: translateY(0);
-    }
+    .screen.on{ opacity: 1; pointer-events:auto; transform: translateY(0); }
     .screen .wrap{
       height:100%;
       width: min(560px, 100%);
@@ -578,7 +560,7 @@
       padding: 8px 0 2px;
     }
     .screenTop .t{
-      font-weight: 900;
+      font-weight: 950;
       letter-spacing:.2px;
       font-size: 18px;
     }
@@ -593,9 +575,9 @@
     .tab{
       padding: 8px 10px;
       border-radius: 999px;
-      font-weight: 850;
+      font-weight: 900;
       font-size: 12px;
-      color: rgba(255,255,255,.75);
+      color: rgba(255,255,255,.72);
       cursor:pointer;
       user-select:none;
       border:1px solid transparent;
@@ -606,10 +588,6 @@
       background: rgba(255,255,255,.12);
       color: rgba(255,255,255,.92);
       border-color: rgba(255,255,255,.14);
-    }
-
-    .filters{
-      display:flex; gap:8px; align-items:center; flex-wrap:wrap;
     }
 
     .list{
@@ -637,19 +615,18 @@
       border: 1px solid rgba(255,255,255,.12);
       flex:0 0 auto;
       background: rgba(255,255,255,.06);
+      display:flex; align-items:center; justify-content:center;
+      font-weight: 950;
     }
     .thumb img{ width:100%; height:100%; object-fit:cover; }
-    .row .info{
-      min-width:0;
-      flex:1;
-    }
-    .row .info .main{
-      font-weight: 900;
+    .info{ min-width:0; flex:1; }
+    .main{
+      font-weight: 950;
       white-space:nowrap;
       overflow:hidden;
       text-overflow: ellipsis;
     }
-    .row .info .sub{
+    .sub{
       margin-top:2px;
       font-size: 12px;
       color: var(--muted);
@@ -657,20 +634,20 @@
       overflow:hidden;
       text-overflow: ellipsis;
     }
-    .row .rank{
+    .rank{
       flex:0 0 auto;
       font-weight: 950;
-      color: rgba(255,255,255,.85);
+      color: rgba(255,255,255,.86);
       background: rgba(255,255,255,.08);
       border: 1px solid rgba(255,255,255,.12);
       border-radius: 14px;
       padding: 8px 10px;
       text-align:right;
-      min-width: 74px;
+      min-width: 78px;
     }
-    .row .rank .s{
+    .rank .s{
       display:block; font-size: 11px; color: var(--muted);
-      font-weight: 800;
+      font-weight: 900;
       margin-top:2px;
     }
 
@@ -690,17 +667,26 @@
       background: rgba(0,0,0,.30);
       backdrop-filter: blur(12px);
       box-shadow: var(--shadow2);
-      font-weight: 850;
+      font-weight: 900;
       color: rgba(255,255,255,.92);
       max-width: min(520px, 92vw);
       text-align:center;
     }
-    .toast.on{
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
+    .toast.on{ opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* Shake on long press */
+    @keyframes shake {
+      0% { transform: translate3d(0,0,0) rotate(0deg); }
+      20%{ transform: translate3d(-1px, 0,0) rotate(-.35deg); }
+      40%{ transform: translate3d(1px, 0,0) rotate(.35deg); }
+      60%{ transform: translate3d(-1px, 0,0) rotate(-.35deg); }
+      80%{ transform: translate3d(1px, 0,0) rotate(.35deg); }
+      100%{ transform: translate3d(0,0,0) rotate(0deg); }
+    }
+    .isShaking{
+      animation: shake .18s linear infinite;
     }
 
-    /* Reduced motion */
     @media (prefers-reduced-motion: reduce){
       *{ animation: none !important; transition: none !important; }
     }
@@ -712,24 +698,16 @@
     <div class="topbar">
       <div class="brand">
         <div class="logo"></div>
-        <div>
+        <div class="brandText">
           <div class="title">MemeSwipe</div>
-          <div class="subtitle">свайпай мемы, качай уровень</div>
+          <div class="subtitle">свайп ← лайк · свайп → дизлайк · вверх — профиль</div>
         </div>
       </div>
-      <div class="pill" id="pill">
-        <div class="dot"></div>
-        <div>
-          <div style="font-weight:900; letter-spacing:.2px" id="pillText">Online</div>
-          <small id="pillSub">WebApp</small>
-        </div>
-      </div>
+      <div class="hintPill">без повторов</div>
     </div>
 
-    <div class="stage">
-      <div class="cardWrap" id="cardWrap">
-        <!-- Card inserted via JS -->
-      </div>
+    <div class="stage" id="stage">
+      <div class="cardWrap" id="cardWrap"></div>
     </div>
 
     <div class="dock">
@@ -742,16 +720,15 @@
     </div>
   </div>
 
-  <!-- Overlays / Sheets -->
   <div class="overlay" id="overlay"></div>
 
-  <!-- Profile sheet -->
+  <!-- Profile sheet (no X, swipe down to close) -->
   <div class="sheet" id="profileSheet" aria-hidden="true">
-    <div class="panel">
+    <div class="panel" data-sheet="profile">
       <div class="grab"><div class="bar"></div></div>
       <div class="panelHeader">
         <div class="h">Профиль</div>
-        <div class="xbtn" id="closeProfile">✕</div>
+        <div class="swipeHint">свайп вниз — закрыть</div>
       </div>
       <div class="panelBody">
         <div class="profileRow">
@@ -768,7 +745,7 @@
             <div class="v" id="statMemes">0</div>
           </div>
           <div class="statCard">
-            <div class="k">Общий рейтинг</div>
+            <div class="k">Общий score</div>
             <div class="v" id="statScore">0</div>
           </div>
           <div class="statCard">
@@ -785,33 +762,21 @@
           <div class="btn primary" id="btnAddMeme">Добавить мем</div>
           <div class="btn" id="btnRating">Рейтинг</div>
         </div>
-
-        <div class="btnRow">
-          <div class="btn danger" id="btnResetDemo">Сбросить демо</div>
-        </div>
       </div>
     </div>
   </div>
 
-  <!-- Report sheet -->
+  <!-- Report sheet (no X / no cancel; tap reason = send; swipe down to close) -->
   <div class="sheet" id="reportSheet" aria-hidden="true">
-    <div class="panel">
+    <div class="panel" data-sheet="report">
       <div class="grab"><div class="bar"></div></div>
       <div class="panelHeader">
-        <div class="h">Пожаловаться</div>
-        <div class="xbtn" id="closeReport">✕</div>
+        <div class="h">Жалоба</div>
+        <div class="swipeHint">выбери причину · вниз — закрыть</div>
       </div>
       <div class="panelBody">
-        <div style="color:var(--muted); font-size:12px; margin-bottom:8px" id="reportTarget">
-          Мем: —
-        </div>
-
+        <div style="color:var(--muted); font-size:12px; margin-bottom:8px" id="reportTarget">Мем: —</div>
         <div class="reasonList" id="reasonList"></div>
-
-        <div class="btnRow" style="margin-top:10px">
-          <div class="btn primary" id="sendReport">Отправить</div>
-          <div class="btn" id="cancelReport">Отмена</div>
-        </div>
       </div>
     </div>
   </div>
@@ -821,7 +786,7 @@
     <div class="wrap">
       <div class="screenTop">
         <div class="t">Рейтинг</div>
-        <div class="xbtn" id="closeRating">✕</div>
+        <div class="hintPill" id="closeRating" style="cursor:pointer">назад</div>
       </div>
 
       <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap">
@@ -829,7 +794,7 @@
           <div class="tab on" id="tabMemes">Топ мемов</div>
           <div class="tab" id="tabAuthors">Топ авторов</div>
         </div>
-        <div class="filters tabs" style="padding:6px">
+        <div class="tabs" style="padding:6px" id="rangeTabs">
           <div class="tab on" data-range="day">Сегодня</div>
           <div class="tab" data-range="week">Неделя</div>
           <div class="tab" data-range="all">Всё</div>
@@ -841,7 +806,6 @@
   </div>
 
   <div class="toast" id="toast">—</div>
-
   <input type="file" id="fileInput" accept="image/*" style="display:none" />
 
   <script>
@@ -852,30 +816,23 @@
     try{
       TG?.ready();
       TG?.expand();
-      // Make Telegram UI look consistent
-      TG?.setHeaderColor?.("secondary_bg_color");
-      TG?.setBackgroundColor?.("#0b0f19");
-      // optional: disable vertical swipe closing
-      TG?.enableClosingConfirmation?.();
+      TG?.setBackgroundColor?.("#070A12");
     }catch(e){}
 
     /****************
      * Demo content *
      ****************/
-    // In production: memes come from backend, images stored in CDN/S3.
-    // Here: use reliable placeholder images (picsum). Replace with your storage later.
     const demoMemes = [
-      { id: "m1", authorId:"u2", author:"Sasha", title:"Когда дедлайн был вчера", img:"https://picsum.photos/seed/meme101/900/1200", likes: 12, dislikes: 3, reports:0 },
-      { id: "m2", authorId:"u3", author:"Olya", title:"Сдал лабу… но не ту", img:"https://picsum.photos/seed/meme102/900/1200", likes: 4, dislikes: 6, reports:0 },
-      { id: "m3", authorId:"u4", author:"Tim", title:"Я: начну с понедельника", img:"https://picsum.photos/seed/meme103/900/1200", likes: 20, dislikes: 5, reports:0 },
-      { id: "m4", authorId:"u5", author:"Nastya", title:"Когда препод сказал 'это легко'", img:"https://picsum.photos/seed/meme104/900/1200", likes: 8, dislikes: 1, reports:0 },
-      { id: "m5", authorId:"u6", author:"Max", title:"Коммит: fix", img:"https://picsum.photos/seed/meme105/900/1200", likes: 2, dislikes: 9, reports:0 },
-      { id: "m6", authorId:"u7", author:"Ira", title:"Я после 2 часов сна", img:"https://picsum.photos/seed/meme106/900/1200", likes: 15, dislikes: 2, reports:0 },
-      { id: "m7", authorId:"u8", author:"Den", title:"Семинар — это отдых", img:"https://picsum.photos/seed/meme107/900/1200", likes: 7, dislikes: 7, reports:0 },
-      { id: "m8", authorId:"u9", author:"Vika", title:"Случайно удалил папку project", img:"https://picsum.photos/seed/meme108/900/1200", likes: 19, dislikes: 4, reports:0 },
+      { id: "m1", authorId:"u2", author:"Sasha", title:"Когда дедлайн был вчера", img:"https://picsum.photos/seed/meme201/900/1200", likes: 12, dislikes: 3, reports:0 },
+      { id: "m2", authorId:"u3", author:"Olya", title:"Сдал лабу… но не ту", img:"https://picsum.photos/seed/meme202/900/1200", likes: 4, dislikes: 6, reports:0 },
+      { id: "m3", authorId:"u4", author:"Tim", title:"Я: начну с понедельника", img:"https://picsum.photos/seed/meme203/900/1200", likes: 20, dislikes: 5, reports:0 },
+      { id: "m4", authorId:"u5", author:"Nastya", title:"Когда препод сказал 'это легко'", img:"https://picsum.photos/seed/meme204/900/1200", likes: 8, dislikes: 1, reports:0 },
+      { id: "m5", authorId:"u6", author:"Max", title:"Коммит: fix", img:"https://picsum.photos/seed/meme205/900/1200", likes: 2, dislikes: 9, reports:0 },
+      { id: "m6", authorId:"u7", author:"Ira", title:"Я после 2 часов сна", img:"https://picsum.photos/seed/meme206/900/1200", likes: 15, dislikes: 2, reports:0 },
+      { id: "m7", authorId:"u8", author:"Den", title:"Семинар — это отдых", img:"https://picsum.photos/seed/meme207/900/1200", likes: 7, dislikes: 7, reports:0 },
+      { id: "m8", authorId:"u9", author:"Vika", title:"Случайно удалил папку project", img:"https://picsum.photos/seed/meme208/900/1200", likes: 19, dislikes: 4, reports:0 },
     ];
 
-    // Local state (in prod: per-user in DB)
     const state = {
       user: {
         id: "u1",
@@ -890,27 +847,22 @@
         postedThisHour: 0,
         lastHourKey: hourKeyNow(),
       },
-      memes: [],
-      seen: new Set(),         // memeIds seen/voted by this user
-      hidden: new Set(),       // memeIds hidden (reported)
-      queue: [],               // available meme ids for feed (not seen, not hidden)
-      current: null,           // current meme object
-      lastAuthorId: null,      // to avoid same author twice in a row
-      report: {
-        openForMemeId: null,
-        selectedReason: null,
-      },
-      rating: {
-        mode: "memes", // memes|authors
-        range: "day",  // day|week|all (demo only)
-      }
+      memes: demoMemes.map(m => ({...m})),
+      seen: new Set(),
+      hidden: new Set(),
+      queue: [],
+      current: null,
+      lastAuthorId: null,
+
+      report: { openForMemeId: null },
+
+      rating: { mode: "memes", range: "day" },
+
+      ui: { cardDragging: false } // for global swipe-up
     };
 
-    // Clone demo to state
-    state.memes = demoMemes.map(m => ({...m}));
-
     /***********************
-     * Level / posting caps *
+     * Levels / posting caps *
      ***********************/
     const LEVELS = [
       { level: 1, xpNeed: 0,   perDay: 3,  perHour: 2, title:"Новичок" },
@@ -922,9 +874,7 @@
 
     function getLevelInfo(xp){
       let cur = LEVELS[0];
-      for(const l of LEVELS){
-        if(xp >= l.xpNeed) cur = l;
-      }
+      for(const l of LEVELS) if(xp >= l.xpNeed) cur = l;
       return cur;
     }
 
@@ -932,7 +882,6 @@
       const d = new Date();
       return `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()} ${d.getHours()}`;
     }
-
     function resetHourIfNeeded(){
       const k = hourKeyNow();
       if(state.user.lastHourKey !== k){
@@ -944,20 +893,24 @@
     /*****************
      * Feed selection *
      *****************/
+    function fisherYates(arr){
+      for(let i=arr.length-1;i>0;i--){
+        const j = Math.floor(Math.random()*(i+1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
     function rebuildQueue(){
-      // eligible = not seen + not hidden
       const eligible = state.memes.filter(m => !state.seen.has(m.id) && !state.hidden.has(m.id));
-      // shuffle
       const shuffled = eligible.map(m => m.id);
       fisherYates(shuffled);
 
-      // avoid same author twice in a row (soft rule)
+      // soft rule: avoid same author twice in a row at queue head
       if(state.lastAuthorId){
-        // try to move first element if same author
         for(let i=0;i<Math.min(6, shuffled.length);i++){
           const mm = state.memes.find(x => x.id === shuffled[i]);
           if(mm && mm.authorId !== state.lastAuthorId){
-            // swap to front
             [shuffled[0], shuffled[i]] = [shuffled[i], shuffled[0]];
             break;
           }
@@ -967,33 +920,20 @@
     }
 
     function nextMeme(){
-      if(state.queue.length === 0){
-        rebuildQueue();
-      }
-      if(state.queue.length === 0){
-        // no more memes
-        state.current = null;
-        renderEmpty();
-        return;
-      }
-      // pick next that doesn't violate author rule if possible
+      if(state.queue.length === 0) rebuildQueue();
+      if(state.queue.length === 0){ renderEmpty(); return; }
+
       let id = state.queue.shift();
       let m = state.memes.find(x => x.id === id);
 
+      // avoid same author if possible
       if(state.lastAuthorId && m && m.authorId === state.lastAuthorId){
-        // try find alternative within first few
         let swapIdx = -1;
         for(let i=0;i<Math.min(8, state.queue.length);i++){
           const mm = state.memes.find(x => x.id === state.queue[i]);
-          if(mm && mm.authorId !== state.lastAuthorId){
-            swapIdx = i;
-            break;
-          }
+          if(mm && mm.authorId !== state.lastAuthorId){ swapIdx = i; break; }
         }
         if(swapIdx >= 0){
-          state.queue.unshift(id); // put back
-          id = state.queue.splice(swapIdx+1, 1)[0] ?? id; // careful
-          // above line can misbehave; do safe:
           const alt = state.queue.splice(swapIdx, 1)[0];
           state.queue.unshift(id);
           id = alt;
@@ -1005,18 +945,12 @@
       renderCard(m);
     }
 
-    function fisherYates(arr){
-      for(let i=arr.length-1;i>0;i--){
-        const j = Math.floor(Math.random()*(i+1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
-      }
-      return arr;
-    }
-
     /****************
      * UI Rendering *
      ****************/
+    const stage = document.getElementById("stage");
     const cardWrap = document.getElementById("cardWrap");
+
     const bubbleAvatar = document.getElementById("bubbleAvatar");
     const profileAvatar = document.getElementById("profileAvatar");
     const profileName = document.getElementById("profileName");
@@ -1031,34 +965,49 @@
       const s = (name || "U").trim();
       return (s[0] || "U").toUpperCase();
     }
+    function escapeHtml(s){
+      return String(s ?? "").replace(/[&<>"']/g, c => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+      }[c]));
+    }
+    function scoreOf(m){ return (m.likes || 0) - (m.dislikes || 0); }
 
     function renderStats(){
       const info = getLevelInfo(state.user.xp);
       state.user.level = info.level;
-      const lim = `${info.perDay}/день, ${info.perHour}/час`;
-      profileName.textContent = state.user.name;
+
       bubbleAvatar.textContent = initials(state.user.name);
       profileAvatar.textContent = initials(state.user.name);
+      profileName.textContent = state.user.name;
 
-      profileLvl.textContent = `Уровень ${info.level} · ${info.title} · XP ${state.user.xp} · лимит: ${lim}`;
+      profileLvl.textContent = `Уровень ${info.level} · ${info.title} · XP ${state.user.xp} · лимит: ${info.perDay}/день, ${info.perHour}/час`;
       statMemes.textContent = state.user.memesPosted;
       statScore.textContent = state.user.score;
       statLikes.textContent = state.user.likesReceived;
       statDislikes.textContent = state.user.dislikesReceived;
     }
 
-    function scoreOf(m){ return (m.likes || 0) - (m.dislikes || 0); }
+    function likeIcon(color){
+      return `
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M9.5 10.2V20H6.2c-1 0-1.7-.8-1.7-1.7v-6.1c0-.9.7-1.7 1.7-1.7H9.5Z" fill="rgba(255,255,255,.18)" stroke="rgba(255,255,255,.18)"/>
+            <path d="M9.5 10.2 13 3.7c.5-1 1.8-1.4 2.9-.9.8.4 1.2 1.3 1.1 2.1l-.6 3.2h3.3c1.2 0 2.1 1.1 1.9 2.2l-1.3 7.3c-.2.9-1 1.6-1.9 1.6H9.5" stroke="${color}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+          </svg>
+        </span>`;
+    }
+    function dislikeIcon(color){
+      return `
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M14.5 13.8V4h3.3c1 0 1.7.8 1.7 1.7v6.1c0 .9-.7 1.7-1.7 1.7h-3.3Z" fill="rgba(255,255,255,.18)" stroke="rgba(255,255,255,.18)"/>
+            <path d="M14.5 13.8 11 20.3c-.5 1-1.8 1.4-2.9.9-.8-.4-1.2-1.3-1.1-2.1l.6-3.2H4.3c-1.2 0-2.1-1.1-1.9-2.2l1.3-7.3c.2-.9 1-1.6 1.9-1.6h8.9" stroke="${color}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+          </svg>
+        </span>`;
+    }
 
     function renderCard(m){
       cardWrap.innerHTML = "";
-
-      const likeStamp = document.createElement("div");
-      likeStamp.className = "stamp like";
-      likeStamp.textContent = "LIKE";
-
-      const dislikeStamp = document.createElement("div");
-      dislikeStamp.className = "stamp dislike";
-      dislikeStamp.textContent = "NOPE";
 
       const card = document.createElement("div");
       card.className = "memeCard";
@@ -1066,41 +1015,50 @@
         <div class="memeMedia">
           <img src="${escapeHtml(m.img)}" alt="meme" />
           <div class="memeTop">
-            <div class="authorBox">
+            <div class="glassBox">
               <div class="author">
                 ${escapeHtml(m.author)}
-                <span class="badge">@${escapeHtml(m.author.toLowerCase())}</span>
+                <span class="tag">@${escapeHtml(m.author.toLowerCase())}</span>
               </div>
               <div class="meta">
                 <span>👍 ${m.likes}</span>
                 <span>👎 ${m.dislikes}</span>
-                <span>Score ${scoreOf(m)}</span>
+                <span>score ${scoreOf(m)}</span>
               </div>
             </div>
-            <div class="scoreBox">
+            <div class="glassBox">
               <div class="score">${scoreOf(m)} <small>score</small></div>
-              <div style="font-size:12px;color:rgba(255,255,255,.70);margin-top:3px">long-press → репорт</div>
+              <div class="microHint">удержание — жалоба</div>
             </div>
           </div>
-          <!-- stamps -->
+
+          <div class="centerIndicator" id="centerIndicator">
+            <div class="badgeBig like" id="badgeLike" style="display:none">
+              ${likeIcon("rgba(34,229,166,.95)")}
+              <span>LIKE</span>
+            </div>
+            <div class="badgeBig dislike" id="badgeDislike" style="display:none">
+              ${dislikeIcon("rgba(255,77,109,.95)")}
+              <span>NOPE</span>
+            </div>
+          </div>
         </div>
+
         <div class="caption">
           <div class="text">
             <div class="line1">${escapeHtml(m.title || "Без названия")}</div>
-            <div class="line2">Свайп ← лайк · свайп → дизлайк</div>
-          </div>
-          <div class="hint">
-            <span class="chip"></span>
-            <span>без повторов</span>
+            <div class="line2">вверх — профиль · удержание — жалоба</div>
           </div>
         </div>
       `;
-      card.querySelector(".memeMedia").appendChild(likeStamp);
-      card.querySelector(".memeMedia").appendChild(dislikeStamp);
 
       cardWrap.appendChild(card);
 
-      attachGestures(card, likeStamp, dislikeStamp);
+      const indicator = card.querySelector("#centerIndicator");
+      const badgeLike = card.querySelector("#badgeLike");
+      const badgeDislike = card.querySelector("#badgeDislike");
+
+      attachCardGestures(card, indicator, badgeLike, badgeDislike);
     }
 
     function renderEmpty(){
@@ -1109,7 +1067,7 @@
           <div style="max-width:420px">
             <div style="font-weight:950; font-size:20px; letter-spacing:.2px">Мемы закончились</div>
             <div style="margin-top:10px; color:var(--muted); line-height:1.35">
-              Ты посмотрел всё, что есть в демо. В проде тут будет бесконечная лента.
+              В демо ты посмотрел всё. В проде лента будет бесконечной.
             </div>
             <div style="margin-top:14px; display:flex; gap:10px; justify-content:center">
               <div class="btn" id="btnMore">Перемешать заново</div>
@@ -1118,89 +1076,106 @@
         </div>
       `;
       document.getElementById("btnMore")?.addEventListener("click", ()=>{
-        // demo: allow repeats by clearing seen
         state.seen.clear();
         rebuildQueue();
         nextMeme();
-        showToast("Ок: лента перемешана заново");
+        showToast("Лента перемешана");
       });
     }
 
-    function escapeHtml(s){
-      return String(s ?? "").replace(/[&<>"']/g, c => ({
-        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
-      }[c]));
-    }
-
     /*****************
-     * Swipe gestures *
+     * Card gestures  *
      *****************/
-    function attachGestures(card, likeStamp, dislikeStamp){
+    function clamp(v, a, b){ return Math.max(a, Math.min(b, v)); }
+
+    function attachCardGestures(card, indicator, badgeLike, badgeDislike){
       let startX = 0, startY = 0, dx = 0, dy = 0;
       let dragging = false;
       let longPressTimer = null;
       let longPressed = false;
 
-      const THRESH = 92;  // swipe commit px
-      const MAX_ROT = 12; // deg
+      const THRESH = 92;
+      const MAX_ROT = 10;
 
       const onDown = (e) => {
-        const p = point(e);
-        startX = p.x; startY = p.y;
-        dx = 0; dy = 0;
+        state.ui.cardDragging = true;
         dragging = true;
         longPressed = false;
 
-        // long-press to report (ignore if user starts moving)
+        const p = point(e);
+        startX = p.x; startY = p.y;
+        dx = 0; dy = 0;
+
+        card.style.transition = "none";
+
+        // long press: start shake a bit earlier, then open report
         longPressTimer = setTimeout(()=>{
           if(!dragging) return;
           longPressed = true;
-          openReportForCurrent();
-          // small haptic if telegram
-          try{ TG?.HapticFeedback?.impactOccurred?.("light"); }catch(_){}
+          card.classList.add("isShaking");
+          // open report after a tiny shake delay
+          setTimeout(()=>{
+            if(!dragging) return;
+            card.classList.remove("isShaking");
+            openReportForCurrent();
+            try{ TG?.HapticFeedback?.impactOccurred?.("light"); }catch(_){}
+          }, 180);
         }, 420);
-
-        card.style.transition = "none";
       };
 
       const onMove = (e) => {
         if(!dragging) return;
+
         const p = point(e);
         dx = p.x - startX;
         dy = p.y - startY;
 
+        // cancel long press if moved
         if(Math.abs(dx) > 10 || Math.abs(dy) > 10){
           clearTimeout(longPressTimer);
+          card.classList.remove("isShaking");
         }
 
-        // If long-press already triggered, ignore drag
         if(longPressed) return;
 
-        // Only horizontal swipes
-        const rot = clamp(dx / 18, -MAX_ROT, MAX_ROT);
-        card.style.transform = `translate3d(${dx}px, ${dy*0.18}px, 0) rotate(${rot}deg)`;
-
-        // stamps opacity
-        const a = clamp(Math.abs(dx) / THRESH, 0, 1);
-        if(dx < 0){
-          likeStamp.classList.toggle("on", a > 0.12);
-          dislikeStamp.classList.remove("on");
-          likeStamp.style.opacity = a;
+        // show center indicator based on dx
+        const strength = clamp(Math.abs(dx) / THRESH, 0, 1);
+        if(Math.abs(dx) > 8){
+          indicator.classList.add("on");
+          indicator.style.opacity = String(0.25 + strength * 0.75);
+          if(dx < 0){
+            badgeLike.style.display = "flex";
+            badgeDislike.style.display = "none";
+          }else{
+            badgeLike.style.display = "none";
+            badgeDislike.style.display = "flex";
+          }
         }else{
-          dislikeStamp.classList.toggle("on", a > 0.12);
-          likeStamp.classList.remove("on");
-          dislikeStamp.style.opacity = a;
+          indicator.classList.remove("on");
+          indicator.style.opacity = "0";
+          badgeLike.style.display = "none";
+          badgeDislike.style.display = "none";
         }
+
+        // move card
+        const rot = clamp(dx / 20, -MAX_ROT, MAX_ROT);
+        card.style.transform = `translate3d(${dx}px, ${dy*0.12}px, 0) rotate(${rot}deg)`;
       };
 
       const onUp = () => {
         if(!dragging) return;
         dragging = false;
+        state.ui.cardDragging = false;
         clearTimeout(longPressTimer);
+        card.classList.remove("isShaking");
 
+        // if long-press opened report, just reset card visual
         if(longPressed){
-          // report sheet already opened
-          card.style.transform = "translate3d(0,0,0)";
+          indicator.classList.remove("on");
+          indicator.style.opacity = "0";
+          badgeLike.style.display = "none";
+          badgeDislike.style.display = "none";
+          card.style.transform = "translate3d(0,0,0) rotate(0deg)";
           return;
         }
 
@@ -1208,25 +1183,18 @@
         card.style.transition = "transform .22s cubic-bezier(.2,.85,.2,1)";
 
         if(!commit){
-          likeStamp.classList.remove("on");
-          dislikeStamp.classList.remove("on");
-          likeStamp.style.opacity = 0;
-          dislikeStamp.style.opacity = 0;
+          indicator.classList.remove("on");
+          indicator.style.opacity = "0";
+          badgeLike.style.display = "none";
+          badgeDislike.style.display = "none";
           card.style.transform = "translate3d(0,0,0) rotate(0deg)";
           return;
         }
 
-        // Commit direction
         if(dx < 0){
-          // like
-          swipeOut(card, -1, ()=>{
-            voteCurrent("like");
-          });
+          swipeOut(card, -1, ()=> voteCurrent("like"));
         }else{
-          // dislike
-          swipeOut(card, +1, ()=>{
-            voteCurrent("dislike");
-          });
+          swipeOut(card, +1, ()=> voteCurrent("dislike"));
         }
       };
 
@@ -1236,7 +1204,8 @@
       window.addEventListener("pointercancel", onUp, {passive:true});
 
       function swipeOut(el, dir, done){
-        const off = dir * (Math.min(window.innerWidth, 560) + 120);
+        indicator.classList.remove("on");
+        const off = dir * (Math.min(window.innerWidth, 560) + 140);
         const rot = dir * 10;
         el.style.transition = "transform .26s cubic-bezier(.2,.85,.2,1)";
         el.style.transform = `translate3d(${off}px, 0, 0) rotate(${rot}deg)`;
@@ -1249,8 +1218,6 @@
       }
     }
 
-    function clamp(v, a, b){ return Math.max(a, Math.min(b, v)); }
-
     /****************
      * Voting logic *
      ****************/
@@ -1258,123 +1225,29 @@
       const m = state.current;
       if(!m) return;
 
-      // mark seen
       state.seen.add(m.id);
       state.lastAuthorId = m.authorId;
 
       if(kind === "like"){
         m.likes++;
-        // author gains xp
-        // demo: if user likes someone else's meme -> that author gains xp, but we track only user stats here
-        // In prod: update author's stats in DB; here we only show global meme stats.
-        showToast("👍 Лайк");
+        showToast("Лайк");
         try{ TG?.HapticFeedback?.notificationOccurred?.("success"); }catch(_){}
       }else{
         m.dislikes++;
-        showToast("👎 Дизлайк");
+        showToast("Дизлайк");
         try{ TG?.HapticFeedback?.notificationOccurred?.("warning"); }catch(_){}
       }
 
-      // in a real system: if THIS user is author -> update user stats; for demo we keep user's score from their posted memes
-      // Move on
       nextMeme();
-      // Update rating screen if open
-      if(document.getElementById("ratingScreen").classList.contains("on")){
-        renderRating();
-      }
+      if(document.getElementById("ratingScreen").classList.contains("on")) renderRating();
     }
 
     /*****************
-     * Report / Admin *
+     * Sheets (swipe down to close) *
      *****************/
-    const REPORT_REASONS = [
-      { id:"spam", label:"Спам / реклама", hint:"ссылки, продвижение" },
-      { id:"abuse", label:"Оскорбления", hint:"травля, унижение" },
-      { id:"adult", label:"18+ контент", hint:"неприемлемо" },
-      { id:"violence", label:"Шок / насилие", hint:"жесть" },
-      { id:"other", label:"Другое", hint:"прочее" },
-    ];
-
     const overlay = document.getElementById("overlay");
-    const reportSheet = document.getElementById("reportSheet");
-    const reportTarget = document.getElementById("reportTarget");
-    const reasonList = document.getElementById("reasonList");
-
-    function openReportForCurrent(){
-      const m = state.current;
-      if(!m) return;
-      state.report.openForMemeId = m.id;
-      state.report.selectedReason = null;
-
-      reportTarget.textContent = `Мем: ${m.title || m.id} · автор: ${m.author}`;
-      reasonList.innerHTML = "";
-
-      for(const r of REPORT_REASONS){
-        const el = document.createElement("div");
-        el.className = "reason";
-        el.innerHTML = `<div>
-            <div class="l">${escapeHtml(r.label)}</div>
-            <div class="r">${escapeHtml(r.hint)}</div>
-          </div>
-          <div style="color:var(--muted2); font-weight:900">выбрать</div>`;
-        el.addEventListener("click", ()=>{
-          // select / toggle
-          const isSel = state.report.selectedReason === r.id;
-          state.report.selectedReason = isSel ? null : r.id;
-          [...reasonList.children].forEach(ch => ch.classList.remove("sel"));
-          if(!isSel) el.classList.add("sel");
-        });
-        reasonList.appendChild(el);
-      }
-
-      openSheet(reportSheet);
-    }
-
-    function sendReport(){
-      const memeId = state.report.openForMemeId;
-      const reason = state.report.selectedReason;
-      if(!memeId) return;
-
-      if(!reason){
-        showToast("Выбери причину или нажми Отмена");
-        try{ TG?.HapticFeedback?.notificationOccurred?.("error"); }catch(_){}
-        return;
-      }
-
-      const m = state.memes.find(x => x.id === memeId);
-      if(m){
-        m.reports = (m.reports || 0) + 1;
-        state.hidden.add(m.id); // hide for this user
-      }
-
-      closeSheet(reportSheet);
-      showToast("Жалоба отправлена — мем скрыт для тебя");
-
-      // In production: send to backend -> admin chat:
-      // POST /report {meme_id, reason, reporter_id}
-      // Backend sends to Telegram admin chat with inline buttons (ban/delete/keep).
-      console.log("[DEMO] Report sent:", { memeId, reason, reporter: state.user.id });
-
-      nextMeme();
-      if(document.getElementById("ratingScreen").classList.contains("on")){
-        renderRating();
-      }
-    }
-
-    /*****************
-     * Profile / Sheets *
-     *****************/
     const profileSheet = document.getElementById("profileSheet");
-    document.getElementById("profileBubble").addEventListener("click", ()=> openSheet(profileSheet));
-    document.getElementById("closeProfile").addEventListener("click", ()=> closeSheet(profileSheet));
-    document.getElementById("closeReport").addEventListener("click", ()=> closeSheet(reportSheet));
-    document.getElementById("cancelReport").addEventListener("click", ()=> closeSheet(reportSheet));
-    document.getElementById("sendReport").addEventListener("click", sendReport);
-
-    overlay.addEventListener("click", ()=>{
-      closeSheet(profileSheet);
-      closeSheet(reportSheet);
-    });
+    const reportSheet = document.getElementById("reportSheet");
 
     function openSheet(el){
       overlay.classList.add("on");
@@ -1384,24 +1257,147 @@
     function closeSheet(el){
       el.classList.remove("on");
       el.setAttribute("aria-hidden","true");
-      // if no sheets open -> hide overlay
       const anyOpen = document.querySelector(".sheet.on");
       if(!anyOpen) overlay.classList.remove("on");
     }
 
+    overlay.addEventListener("click", ()=>{
+      closeSheet(profileSheet);
+      closeSheet(reportSheet);
+    });
+
+    document.getElementById("profileBubble").addEventListener("click", ()=> openSheet(profileSheet));
+
+    // swipe down on panel to close
+    function enableSwipeDownToClose(panelEl, sheetEl){
+      let sy=0, sx=0, dragging=false;
+      panelEl.addEventListener("pointerdown", (e)=>{
+        dragging=true;
+        sx=e.clientX; sy=e.clientY;
+      }, {passive:true});
+      window.addEventListener("pointerup", ()=>{
+        dragging=false;
+      }, {passive:true});
+      window.addEventListener("pointermove", (e)=>{
+        if(!dragging) return;
+        const dy = e.clientY - sy;
+        const dx = e.clientX - sx;
+        if(dy > 90 && Math.abs(dy) > Math.abs(dx)*1.2){
+          dragging=false;
+          closeSheet(sheetEl);
+          try{ TG?.HapticFeedback?.impactOccurred?.("light"); }catch(_){}
+        }
+      }, {passive:true});
+    }
+
+    enableSwipeDownToClose(profileSheet.querySelector(".panel"), profileSheet);
+    enableSwipeDownToClose(reportSheet.querySelector(".panel"), reportSheet);
+
     /*****************
-     * Rating screen *
+     * Global swipe up -> open profile
+     *****************/
+    (function enableGlobalSwipeUp(){
+      let sx=0, sy=0, tracking=false;
+      window.addEventListener("pointerdown", (e)=>{
+        // do not start if any sheet open or rating open
+        if(document.querySelector(".sheet.on") || document.getElementById("ratingScreen").classList.contains("on")) return;
+        tracking = true;
+        sx = e.clientX; sy = e.clientY;
+      }, {passive:true});
+
+      window.addEventListener("pointermove", (e)=>{
+        if(!tracking) return;
+        // if card drag is active, ignore global swipe
+        if(state.ui.cardDragging) return;
+        const dy = e.clientY - sy;
+        const dx = e.clientX - sx;
+        // open on clear upward swipe
+        if(dy < -110 && Math.abs(dy) > Math.abs(dx)*1.2){
+          tracking = false;
+          openSheet(profileSheet);
+          try{ TG?.HapticFeedback?.impactOccurred?.("light"); }catch(_){}
+        }
+      }, {passive:true});
+
+      window.addEventListener("pointerup", ()=>{ tracking=false; }, {passive:true});
+      window.addEventListener("pointercancel", ()=>{ tracking=false; }, {passive:true});
+    })();
+
+    /*****************
+     * Report (tap reason = send)
+     *****************/
+    const REPORT_REASONS = [
+      { id:"spam", label:"Спам / реклама", hint:"ссылки, продвижение" },
+      { id:"abuse", label:"Оскорбления", hint:"травля, унижение" },
+      { id:"adult", label:"18+ контент", hint:"неприемлемо" },
+      { id:"violence", label:"Шок / насилие", hint:"жесть" },
+      { id:"other", label:"Другое", hint:"прочее" },
+    ];
+    const reportTarget = document.getElementById("reportTarget");
+    const reasonList = document.getElementById("reasonList");
+
+    function openReportForCurrent(){
+      const m = state.current;
+      if(!m) return;
+      state.report.openForMemeId = m.id;
+
+      reportTarget.textContent = `Мем: ${m.title || m.id} · автор: ${m.author}`;
+      reasonList.innerHTML = "";
+
+      for(const r of REPORT_REASONS){
+        const el = document.createElement("div");
+        el.className = "reason";
+        el.innerHTML = `
+          <div>
+            <div class="l">${escapeHtml(r.label)}</div>
+            <div class="r">${escapeHtml(r.hint)}</div>
+          </div>
+          <div style="color:var(--muted2); font-weight:950">→</div>
+        `;
+        el.addEventListener("click", ()=>{
+          sendReport(r.id);
+        });
+        reasonList.appendChild(el);
+      }
+
+      openSheet(reportSheet);
+    }
+
+    function sendReport(reasonId){
+      const memeId = state.report.openForMemeId;
+      if(!memeId) return;
+
+      const m = state.memes.find(x => x.id === memeId);
+      if(m){
+        m.reports = (m.reports || 0) + 1;
+        state.hidden.add(m.id); // hide for this user
+      }
+
+      closeSheet(reportSheet);
+      showToast("Жалоба отправлена");
+
+      // PROD: POST /report {meme_id, reason, reporter_id} -> backend -> admin chat
+      console.log("[DEMO] Report:", { memeId, reason: reasonId, reporter: state.user.id });
+
+      try{ TG?.HapticFeedback?.notificationOccurred?.("warning"); }catch(_){}
+      nextMeme();
+      if(document.getElementById("ratingScreen").classList.contains("on")) renderRating();
+    }
+
+    /*****************
+     * Rating screen
      *****************/
     const ratingScreen = document.getElementById("ratingScreen");
     const ratingList = document.getElementById("ratingList");
     const tabMemes = document.getElementById("tabMemes");
     const tabAuthors = document.getElementById("tabAuthors");
+    const closeRatingBtn = document.getElementById("closeRating");
 
     document.getElementById("btnRating").addEventListener("click", ()=>{
       closeSheet(profileSheet);
       openRating();
     });
-    document.getElementById("closeRating").addEventListener("click", closeRating);
+    closeRatingBtn.addEventListener("click", closeRating);
 
     tabMemes.addEventListener("click", ()=>{
       state.rating.mode = "memes";
@@ -1416,9 +1412,9 @@
       renderRating();
     });
 
-    document.querySelectorAll(".filters .tab").forEach(t=>{
+    document.querySelectorAll("#rangeTabs .tab").forEach(t=>{
       t.addEventListener("click", ()=>{
-        document.querySelectorAll(".filters .tab").forEach(x=>x.classList.remove("on"));
+        document.querySelectorAll("#rangeTabs .tab").forEach(x=>x.classList.remove("on"));
         t.classList.add("on");
         state.rating.range = t.getAttribute("data-range") || "day";
         renderRating();
@@ -1438,7 +1434,6 @@
     function renderRating(){
       ratingList.innerHTML = "";
       if(state.rating.mode === "memes"){
-        // sort by score desc, then likes
         const items = [...state.memes].sort((a,b)=>{
           const sa = scoreOf(a), sb = scoreOf(b);
           if(sb !== sa) return sb - sa;
@@ -1459,7 +1454,6 @@
           ratingList.appendChild(row);
         });
       }else{
-        // aggregate authors from memes (demo)
         const map = new Map();
         for(const m of state.memes){
           const a = map.get(m.authorId) || { authorId:m.authorId, author:m.author, likes:0, dislikes:0, score:0, memes:0 };
@@ -1478,9 +1472,7 @@
           const row = document.createElement("div");
           row.className = "row";
           row.innerHTML = `
-            <div class="thumb" style="display:flex;align-items:center;justify-content:center;font-weight:950">
-              ${escapeHtml(a.author[0]?.toUpperCase() || "U")}
-            </div>
+            <div class="thumb">${escapeHtml(a.author[0]?.toUpperCase() || "U")}</div>
             <div class="info">
               <div class="main">#${idx+1} · ${escapeHtml(a.author)}</div>
               <div class="sub">мемов ${a.memes} · 👍 ${a.likes} · 👎 ${a.dislikes}</div>
@@ -1493,7 +1485,7 @@
     }
 
     /*****************
-     * Add meme (demo) *
+     * Add meme (demo)
      *****************/
     const fileInput = document.getElementById("fileInput");
     document.getElementById("btnAddMeme").addEventListener("click", ()=>{
@@ -1505,15 +1497,13 @@
       resetHourIfNeeded();
       const lvl = getLevelInfo(state.user.xp);
 
-      // reset daily in demo? (in prod: by date)
-      // Here: keep simple; you can implement day-key similar to hourKey
       if(state.user.postedToday >= lvl.perDay){
-        showToast(`Лимит на сегодня: ${lvl.perDay}. Прокачай уровень или жди завтра.`);
+        showToast(`Лимит на сегодня: ${lvl.perDay}.`);
         try{ TG?.HapticFeedback?.notificationOccurred?.("error"); }catch(_){}
         return;
       }
       if(state.user.postedThisHour >= lvl.perHour){
-        showToast(`Лимит в час: ${lvl.perHour}. Подожди немного.`);
+        showToast(`Лимит в час: ${lvl.perHour}.`);
         try{ TG?.HapticFeedback?.notificationOccurred?.("error"); }catch(_){}
         return;
       }
@@ -1526,9 +1516,7 @@
       const file = fileInput.files?.[0];
       if(!file) return;
 
-      // create local object URL (demo). In prod: upload to backend, get URL.
       const url = URL.createObjectURL(file);
-
       const title = prompt("Подпись к мему (необязательно):", "Новый мем");
       const newId = "u1_" + Math.random().toString(16).slice(2,10);
 
@@ -1548,68 +1536,32 @@
       state.user.postedToday++;
       state.user.postedThisHour++;
 
-      // Small XP reward for posting? optional:
-      // state.user.xp += 2;
+      // hide own meme from your feed (no self-like)
+      state.seen.add(m.id);
 
       renderStats();
-      showToast("Мем опубликован ✅");
-
-      // Put it into queue for other users (prod). For this user: mark as seen? Up to you.
-      // Here: hide own meme from feed to avoid self-like:
-      state.seen.add(m.id);
+      showToast("Мем опубликован");
 
       rebuildQueue();
       if(!state.current) nextMeme();
-      if(document.getElementById("ratingScreen").classList.contains("on")){
-        renderRating();
-      }
+      if(ratingScreen.classList.contains("on")) renderRating();
     });
 
     /*****************
-     * Demo reset     *
-     *****************/
-    document.getElementById("btnResetDemo").addEventListener("click", ()=>{
-      // reset state
-      state.memes = demoMemes.map(m => ({...m}));
-      state.seen.clear();
-      state.hidden.clear();
-      state.queue = [];
-      state.current = null;
-      state.lastAuthorId = null;
-      state.user.xp = 0;
-      state.user.level = 1;
-      state.user.likesReceived = 0;
-      state.user.dislikesReceived = 0;
-      state.user.memesPosted = 0;
-      state.user.score = 0;
-      state.user.postedToday = 0;
-      state.user.postedThisHour = 0;
-      state.user.lastHourKey = hourKeyNow();
-
-      renderStats();
-      closeSheet(profileSheet);
-      closeRating();
-      rebuildQueue();
-      nextMeme();
-      showToast("Демо сброшено");
-    });
-
-    /*****************
-     * Toast helper   *
+     * Toast helper
      *****************/
     let toastTimer = null;
     function showToast(text){
       toast.textContent = text;
       toast.classList.add("on");
       clearTimeout(toastTimer);
-      toastTimer = setTimeout(()=> toast.classList.remove("on"), 1600);
+      toastTimer = setTimeout(()=> toast.classList.remove("on"), 1400);
     }
 
     /*****************
      * Init user info *
      *****************/
     function initUserFromTelegram(){
-      // If opened inside Telegram, pull name.
       try{
         const u = TG?.initDataUnsafe?.user;
         if(u){
@@ -1620,14 +1572,14 @@
     }
 
     /*****************
-     * Boot           *
+     * Boot
      *****************/
     initUserFromTelegram();
     renderStats();
     rebuildQueue();
     nextMeme();
 
-    // Close report/profile if user presses ESC (desktop)
+    // ESC closes (desktop)
     window.addEventListener("keydown", (e)=>{
       if(e.key === "Escape"){
         closeSheet(profileSheet);
